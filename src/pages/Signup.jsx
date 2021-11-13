@@ -127,6 +127,7 @@ function Signup({ setUser }) {
             </p>
           </div>
         )}
+        {imageIsUploading && <LoadingComponent />}
         <button
           className="button__submit btn-orange btn auth__submit-btn"
           type="submit"
@@ -134,7 +135,6 @@ function Signup({ setUser }) {
         >
           Submit
         </button>
-        {imageIsUploading && <LoadingComponent />}
       </form>
     </div>
   );

@@ -204,6 +204,7 @@ function AddRecipe() {
             </p>
           </div>
         )}
+        {imageIsUploading && <LoadingComponent />}
         <button
           className="button__submit btn-orange btn auth__submit-btn"
           type="submit"
@@ -211,7 +212,6 @@ function AddRecipe() {
         >
           Submit
         </button>
-        {imageIsUploading && <LoadingComponent />}
       </form>
     </div>
   );
