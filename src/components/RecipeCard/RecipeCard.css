@@ -1,0 +1,16 @@
+.card {
+  margin-top: 3vh;
+}
+
+.card-text {
+  font-size: 0.7rem !important;
+}
+
+.card-reviews {
+  color: gray;
+  margin-left: 2vw;
+}
+
+.card-rating {
+  display: flex;
+}
