@@ -3,7 +3,9 @@
   background-color: #f76333;
   display: flex;
   justify-content: space-between !important;
+  position: fixed;
   width: 100vw;
+  z-index: 100;
 }
 
 .navbar__logo {
@@ -12,7 +14,7 @@
 
 .navbar__link-logo {
   left: 45%;
-  position: fixed;
+  position: absolute;
 }
 
 .nav__authLinks {
@@ -24,6 +26,10 @@
   color: white;
   margin-right: 2vw;
   text-decoration: none;
+}
+
+.authLink:hover {
+  color: white;
 }
 
 .navbar__profile-pic {

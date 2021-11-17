@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./pages/HomePage";
-import LogIn from "./pages/LogIn";
-import ProtectedPage from "./pages/ProtectedPage";
-import Signup from "./pages/Signup";
-import Recipes from "./pages/Recipes";
+import LogIn from "./pages/Auth/LogIn";
+import Signup from "./pages/Auth/Signup";
+import Recipes from "./pages/Recipes/Recipes";
 import { loggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
-import AddRecipe from "./pages/AddRecipe";
+import AddRecipe from "./pages/Recipes/AddRecipe";
+import EditRecipe from "./pages/Recipes/EditRecipe";
+import RecipeDetails from "./pages/Recipes/RecipeDetails";
 
 function App() {
   const navigate = useNavigate();
@@ -66,10 +67,26 @@ function App() {
         <Route exact path={PATHS.RECIPES} element={<Recipes user={user} />} />
         <Route
           exact
+          path={PATHS.RECIPES_DETAILS}
+          element={<RecipeDetails user={user} setUser={setUser} />}
+        />
+        <Route
+          exact
           path={PATHS.CREATE_RECIPE}
           element={
             isLoggedIn ? (
               <AddRecipe user={user} />
+            ) : (
+              <Navigate to={PATHS.LOGINPAGE} />
+            )
+          }
+        />
+        <Route
+          exact
+          path={PATHS.EDIT_RECIPE}
+          element={
+            isLoggedIn ? (
+              <EditRecipe user={user} />
             ) : (
               <Navigate to={PATHS.LOGINPAGE} />
             )

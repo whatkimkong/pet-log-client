@@ -4,6 +4,7 @@
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 0.9rem !important;
   min-height: 100vh;
+  max-height: max-content;
 }
 
 .btn:hover {
@@ -47,6 +48,10 @@
   padding: 8px 14px !important;
 }
 
+.link-back {
+  margin-left: 10vw;
+}
+
 /* PUBLIC */
 
 .public__container {
@@ -68,7 +73,7 @@
 }
 
 .homepage__logo {
-  margin-top: 10vh;
+  margin-top: 15vh;
   width: 18%;
 }
 
@@ -195,16 +200,151 @@ button.button__submit {
 
 .add-recipe__title {
   color: white;
-  margin-top: 5vh;
-  text-align: center;
+  display: block;
+  margin: 0 auto;
+  padding-top: 13vh;
+  text-align: left;
+  width: 90% !important;
 }
 
 .add-recipe__form {
   display: block;
-  margin: 5vh auto !important;
+  margin: 5vh auto 0 !important;
   width: 90% !important;
 }
 
 .add-form {
-  border-radius: 6px !important;
+  border-radius: 4px !important;
+}
+
+.add-recipe__submit-btn {
+  margin-bottom: 2vh;
+  width: 100%;
+}
+
+.add-form {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border: none !important;
+}
+
+/* RECIPE DETAILS */
+
+.recipe-details__container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 85%;
+}
+
+.recipe-details__img {
+  border-radius: 4px;
+  width: 100%;
+}
+
+.recipes__title {
+  color: white;
+  margin-top: 13vh;
+  text-align: left;
+  width: 70%;
+}
+
+.recipe-details__title {
+  color: white;
+  margin-bottom: 4vh;
+  padding-top: 13vh;
+  text-align: left;
+  width: 100%;
+}
+
+.recipe-details__subcontainer {
+  margin-top: 5vh;
+}
+
+.subcontainer-title {
+  margin-bottom: 3vh;
+}
+
+.recipe-details__creator {
+  align-self: flex-start;
+  margin: 0;
+}
+
+.css-1c99szj-MuiRating-icon {
+  color: rgb(0 0 0 / 35%) !important;
+}
+
+.recipe-details__card-rating {
+  align-self: flex-start;
+  margin-top: 2vh;
+}
+
+.chips-container {
+  display: flex !important;
+  justify-content: space-evenly !important;
+  margin-top: 5vh;
+  width: 100%;
+}
+
+.recipe-details__link-back {
+  align-self: flex-start;
+}
+
+.recipe-actions {
+  margin-right: 2vw;
+}
+
+.recipe-actions-container {
+  margin-top: 2vh;
+}
+
+/* REVIEWS */
+
+.add-review__btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  margin: 2vh 0 0 0;
+  width: max-content;
+}
+
+.add-review-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4vh;
+}
+
+.reviews-container {
+  background-color: white;
+  border-radius: 4px;
+  margin-bottom: 6vh;
+  width: 100%;
+}
+
+.reviews__profile-pic {
+  border-radius: 50%;
+  margin-right: 5px;
+  width: 10%;
+}
+
+.reviews__creator-container {
+  color: rgba(0 0 0 / 70%);
+  margin-bottom: 2vh;
+  margin-top: 1vh;
+}
+
+.reviews__date {
+  color: rgba(0 0 0 / 35%);
+  font-size: 0.7rem;
+  margin-left: 2vw;
+}
+
+.reviews__score-container {
+  align-items: center;
+  display: flex;
+  margin-bottom: 1.5vh;
+}
+
+.reviews__comment {
+  color: rgba(0 0 0 / 70%);
 }

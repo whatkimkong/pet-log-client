@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { signup } from "../services/auth";
-import { fileUpload } from "../services/fileUpload";
+import { signup } from "../../services/auth";
+import { fileUpload } from "../../services/fileUpload";
 import { useNavigate, Link } from "react-router-dom";
-import { HOMEPAGE } from "../utils/paths";
-import LoadingComponent from "../components/Loading";
-import petPic1 from "../images/pets1.jpeg";
-import logo from "../images/logo.png";
-import * as CONSTS from "../utils/consts";
-import avatar from "../images/avatar.png";
+import { HOMEPAGE } from "../../utils/paths";
+import LoadingComponent from "../../components/Loading";
+import petPic1 from "../../images/pets1.jpeg";
+import logo from "../../images/logo.png";
+import * as CONSTS from "../../utils/consts";
+import avatar from "../../images/avatar.png";
 
 function Signup({ setUser }) {
   const [form, setForm] = useState({

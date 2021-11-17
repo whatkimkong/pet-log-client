@@ -17,12 +17,6 @@ function HomePage() {
       }}
       className="public__container"
     >
-      <Link to={PATHS.LOGINPAGE} className="homepage__link_login">
-        {" "}
-        <button type="button" className="btn btn-orange homepage__login-btn">
-          Login
-        </button>
-      </Link>
       <img src={logo} alt={CONSTS.CAPITALIZED_APP} className="homepage__logo" />
       <div className="homepage__description">
         <h1 className="homepage__description__title">Pet Log</h1>

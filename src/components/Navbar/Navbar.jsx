@@ -20,10 +20,6 @@ const Navbar = ({ user, handleLogout }) => {
     setAnchorEl(null);
   };
 
-  if (!PATHS.NAVBAR_ROUTES.includes(pathname)) {
-    return null;
-  }
-
   return (
     <nav className="navbar__container">
       <div>
@@ -98,9 +94,11 @@ const Navbar = ({ user, handleLogout }) => {
           </>
         ) : (
           <>
-            <Link to={PATHS.SIGNUPPAGE} className="authLink">
-              Signup
-            </Link>
+            {pathname !== PATHS.HOMEPAGE && (
+              <Link to={PATHS.SIGNUPPAGE} className="authLink">
+                Signup
+              </Link>
+            )}
             <Link to={PATHS.LOGINPAGE} className="authLink">
               Log In
             </Link>

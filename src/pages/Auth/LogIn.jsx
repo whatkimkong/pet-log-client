@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { login } from "../services/auth";
+import { login } from "../../services/auth";
 import { useNavigate, Link } from "react-router-dom";
-import { HOMEPAGE, SIGNUPPAGE } from "../utils/paths";
-import * as CONSTS from "../utils/consts";
-import petPic1 from "../images/pets1.jpeg";
-import logo from "../images/logo.png";
+import { HOMEPAGE, SIGNUPPAGE } from "../../utils/paths";
+import * as CONSTS from "../../utils/consts";
+import petPic1 from "../../images/pets1.jpeg";
+import logo from "../../images/logo.png";
 
 function LogIn({ setUser }) {
   const [form, setForm] = useState({

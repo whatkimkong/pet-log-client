@@ -14,3 +14,8 @@
 .card-rating {
   display: flex;
 }
+
+.card-links {
+  color: black;
+  text-decoration: none;
+}

@@ -1,8 +1,9 @@
 .wrapper {
-  height: 10vh;
+  height: 6vh;
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 2vh;
   align-items: center;
   background: none;
 }
