@@ -10,6 +10,7 @@ import * as PATHS from "./utils/paths";
 import AddRecipe from "./pages/Recipes/AddRecipe";
 import EditRecipe from "./pages/Recipes/EditRecipe";
 import RecipeDetails from "./pages/Recipes/RecipeDetails";
+import Photos from "./pages/PhotoGallery/Photos";
 
 function App() {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ function App() {
     >
       <Navbar handleLogout={handleLogout} user={user} setUser={setUser} />
       <Routes>
-        <Route exact path={PATHS.HOMEPAGE} element={<HomePage />} />
+        <Route exact path={PATHS.HOMEPAGE} element={<HomePage user={user} />} />
         <Route
           exact
           path={PATHS.SIGNUPPAGE}
@@ -87,6 +88,17 @@ function App() {
           element={
             isLoggedIn ? (
               <EditRecipe user={user} />
+            ) : (
+              <Navigate to={PATHS.LOGINPAGE} />
+            )
+          }
+        />
+        <Route
+          exact
+          path={PATHS.PHOTOS}
+          element={
+            isLoggedIn ? (
+              <Photos user={user} />
             ) : (
               <Navigate to={PATHS.LOGINPAGE} />
             )

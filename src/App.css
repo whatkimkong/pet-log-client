@@ -58,7 +58,8 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding-bottom: 5vh;
+  padding-top: 10vh;
+  padding-bottom: 8vh;
 }
 
 .form-public {
@@ -73,7 +74,6 @@
 }
 
 .homepage__logo {
-  margin-top: 15vh;
   width: 18%;
 }
 
@@ -112,20 +112,84 @@
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 35%);
   height: 30vh !important;
   margin-top: 5vh;
+  width: 70%;
+}
+
+.homepage__notifications-card {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 3px;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 35%);
+  height: 30vh !important;
+  margin-bottom: 5vh;
+  margin-top: 5vh;
+  padding: 10px;
   width: 80%;
 }
 
 .homepage__icon-container {
+  align-items: center;
   background-color: white;
   border-radius: 50%;
-  height: 20%;
-  width: 20%;
+  display: flex;
+  height: 32%;
+  justify-content: center;
+  margin: 4vh auto 2vh auto;
+  width: 25%;
 }
 
 .homepage__icon {
+  border-radius: 50%;
   padding: 5px;
   height: auto;
-  width: 100%;
+  width: 70%;
+}
+
+.homepage__link {
+  color: white;
+  text-decoration: none;
+}
+
+.homepage__card-description {
+  margin: 0 auto;
+  text-align: center;
+  width: 80%;
+}
+
+.homepage__dashboard-container {
+  align-items: space-evenly;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 0vh;
+  width: 80%;
+}
+
+.homepage__dashboard-card {
+  align-items: center;
+  background-color: #ed5d30;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 10vh;
+  margin: 10px;
+  width: 30%;
+}
+
+.homepage__dashboard-card p {
+  font-size: 0.8rem;
+  margin: 0;
+  text-align: center;
+}
+
+.homepage__notifications-title h6 {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.homepage__dashboard-link {
+  color: black;
+  text-decoration: none;
 }
 
 /* AUTH */
@@ -347,4 +411,23 @@ button.button__submit {
 
 .reviews__comment {
   color: rgba(0 0 0 / 70%);
+}
+
+/* PHOTOS */
+
+.css-o535wn-MuiChip-root .MuiChip-icon {
+  color: white !important;
+}
+
+.photos__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 5vh;
+  width: 90%;
+}
+
+.photos__image {
+  width: 40%;
+  margin: 0 10px 10px;
 }
