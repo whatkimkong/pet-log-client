@@ -188,7 +188,10 @@
 }
 
 .homepage__dashboard-link {
+  align-items: center;
   color: black;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
 }
 
@@ -430,4 +433,61 @@ button.button__submit {
 .photos__image {
   width: 40%;
   margin: 0 10px 10px;
+}
+
+/* PROFILE */
+
+.profile__profile-pic {
+  border-radius: 50%;
+  height: 80%;
+}
+
+.profile__profile-pic-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border-radius: 50%;
+  height: 16vh;
+  width: 30vw;
+}
+
+.profile__name {
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+.profile__title {
+  color: white;
+  display: block;
+  margin: 0 auto 5vh;
+  text-align: left;
+  width: 90% !important;
+}
+
+.link-back-profile {
+  align-self: flex-start !important;
+}
+
+.pets__carousel {
+  display: flex;
+  align-items: center;
+}
+
+.pets__section-title {
+  color: white;
+  margin-top: 5vh;
+}
+
+.profile__insurance-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+}
+
+.profile__insurance-category {
+  margin: 0;
+  width: fit-content;
 }

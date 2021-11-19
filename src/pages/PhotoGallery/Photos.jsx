@@ -9,8 +9,6 @@ import { fileUpload } from "../../services/fileUpload";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
 function Photos({ user }) {
@@ -21,16 +19,11 @@ function Photos({ user }) {
   const [error, setError] = useState(null);
   const [show, setShow] = useState(true);
   const navigate = useNavigate();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState("");
 
-  let photoId;
+  const handleOpen = (id) => {};
 
-  const handleOpen = (id) => {
-    photoId = id;
-    console.log(photoId);
-    setOpen(true);
-  };
-  const handleClose = () => setOpen(false);
+  const handleClose = () => setOpen("");
 
   const style = {
     position: "absolute",
@@ -78,13 +71,13 @@ function Photos({ user }) {
       .catch((err) => setError(err.response.data.errorMessage));
   }
 
-  function handleDelete() {
-    handleClose();
-    PHOTOS_SERVICES.deletePhoto(photoId)
+  function handleDelete(id) {
+    PHOTOS_SERVICES.deletePhoto(id)
       .then((res) => {
         return PHOTOS_SERVICES.getAll();
       })
       .then((res) => {
+        handleClose();
         setListOfPhotos(res.data.photos);
         navigate(PATHS.PHOTOS);
       })
@@ -147,7 +140,7 @@ function Photos({ user }) {
                   alt="User's photo"
                   className="photos__image"
                   key={eachPhoto._id}
-                  onClick={() => handleOpen(eachPhoto._id)}
+                  onClick={() => setOpen(eachPhoto._id)}
                 />
               </>
             );
@@ -159,7 +152,7 @@ function Photos({ user }) {
             <button
               className="button__submit btn-orange btn add-recipe__submit-btn"
               type="button"
-              onClick={handleDelete}
+              onClick={() => handleDelete(open)}
             >
               Delete
             </button>

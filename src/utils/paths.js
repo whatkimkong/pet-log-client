@@ -4,7 +4,7 @@ export const SIGNUPPAGE = "/signup";
 export const LOGINPAGE = "/login";
 
 export const USER_PROFILE = "/profile";
-export const PET_PROFILE = "/profile/:petName";
+export const PETS_PROFILE = "/pets/";
 export const PHOTOS = "/photos";
 
 export const RECIPES = "/recipes";

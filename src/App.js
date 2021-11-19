@@ -11,6 +11,8 @@ import AddRecipe from "./pages/Recipes/AddRecipe";
 import EditRecipe from "./pages/Recipes/EditRecipe";
 import RecipeDetails from "./pages/Recipes/RecipeDetails";
 import Photos from "./pages/PhotoGallery/Photos";
+import UserProfile from "./pages/Profiles/UserProfile";
+import PetProfile from "./pages/Profiles/PetProfile";
 
 function App() {
   const navigate = useNavigate();
@@ -99,6 +101,28 @@ function App() {
           element={
             isLoggedIn ? (
               <Photos user={user} />
+            ) : (
+              <Navigate to={PATHS.LOGINPAGE} />
+            )
+          }
+        />
+        <Route
+          exact
+          path={PATHS.USER_PROFILE}
+          element={
+            isLoggedIn ? (
+              <UserProfile user={user} setUser={setUser} />
+            ) : (
+              <Navigate to={PATHS.LOGINPAGE} />
+            )
+          }
+        />
+        <Route
+          exact
+          path={PATHS.PETS_PROFILE}
+          element={
+            isLoggedIn ? (
+              <PetProfile user={user} setUser={setUser} />
             ) : (
               <Navigate to={PATHS.LOGINPAGE} />
             )

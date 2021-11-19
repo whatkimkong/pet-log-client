@@ -111,27 +111,13 @@ function HomePage({ user }) {
             </div>
             <div className="homepage__dashboard-card">
               <Link
-                to={PATHS.USER_PROFILE}
+                to={PATHS.PETS_PROFILE}
                 className="homepage__dashboard-link"
               >
-                <AccountCircleIcon sx={{ color: "white" }} fontSize="large" />
-                <p>Profile</p>
+                <PetsIcon sx={{ color: "white" }} fontSize="large" />
+                <p>Pets</p>
               </Link>
             </div>
-            {user.pets.length > 0 &&
-              user.pets.map((pet) => {
-                return (
-                  <div className="homepage__dashboard-card" key={pet._id}>
-                    <Link
-                      to={PATHS.PET_PROFILE}
-                      className="homepage__dashboard-link"
-                    >
-                      <PetsIcon sx={{ color: "white" }} fontSize="large" />
-                      <p>{pet.name}'s Profile</p>
-                    </Link>
-                  </div>
-                );
-              })}
           </div>
         </>
       )}
