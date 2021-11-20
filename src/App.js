@@ -13,6 +13,10 @@ import RecipeDetails from "./pages/Recipes/RecipeDetails";
 import Photos from "./pages/PhotoGallery/Photos";
 import UserProfile from "./pages/Profiles/UserProfile";
 import PetProfile from "./pages/Profiles/PetProfile";
+import AddPet from "./pages/Profiles/AddPet";
+import EditPet from "./pages/Profiles/EditPet";
+import LoadingComponent from "./components/Loading";
+import PetServices from "./pages/PetServices/PetServices";
 
 function App() {
   const navigate = useNavigate();
@@ -21,7 +25,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   function setUser(user, loggedInStatus) {
-    setIsLoggedIn(loggedInStatus);
+    setIsLoggedIn(loggedInStatus || isLoggedIn);
     setStateUser(user);
   }
 
@@ -32,7 +36,7 @@ function App() {
           setIsLoggedIn(true);
           setStateUser(response.data.user);
         })
-        .catch((err) => setIsLoggedIn(true));
+        .catch((err) => setIsLoggedIn(false));
     }
   }
 
@@ -54,81 +58,121 @@ function App() {
       className="App"
       style={{ backgroundColor: user ? "#ed5d30" : "white" }}
     >
-      <Navbar handleLogout={handleLogout} user={user} setUser={setUser} />
-      <Routes>
-        <Route exact path={PATHS.HOMEPAGE} element={<HomePage user={user} />} />
-        <Route
-          exact
-          path={PATHS.SIGNUPPAGE}
-          element={<Signup setUser={setUser} />}
-        />
-        <Route
-          exact
-          path={PATHS.LOGINPAGE}
-          element={<LogIn setUser={setUser} />}
-        />
-        <Route exact path={PATHS.RECIPES} element={<Recipes user={user} />} />
-        <Route
-          exact
-          path={PATHS.RECIPES_DETAILS}
-          element={<RecipeDetails user={user} setUser={setUser} />}
-        />
-        <Route
-          exact
-          path={PATHS.CREATE_RECIPE}
-          element={
-            isLoggedIn ? (
-              <AddRecipe user={user} />
-            ) : (
-              <Navigate to={PATHS.LOGINPAGE} />
-            )
-          }
-        />
-        <Route
-          exact
-          path={PATHS.EDIT_RECIPE}
-          element={
-            isLoggedIn ? (
-              <EditRecipe user={user} />
-            ) : (
-              <Navigate to={PATHS.LOGINPAGE} />
-            )
-          }
-        />
-        <Route
-          exact
-          path={PATHS.PHOTOS}
-          element={
-            isLoggedIn ? (
-              <Photos user={user} />
-            ) : (
-              <Navigate to={PATHS.LOGINPAGE} />
-            )
-          }
-        />
-        <Route
-          exact
-          path={PATHS.USER_PROFILE}
-          element={
-            isLoggedIn ? (
-              <UserProfile user={user} setUser={setUser} />
-            ) : (
-              <Navigate to={PATHS.LOGINPAGE} />
-            )
-          }
-        />
-        <Route
-          exact
-          path={PATHS.PETS_PROFILE}
-          element={
-            isLoggedIn ? (
-              <PetProfile user={user} setUser={setUser} />
-            ) : (
-              <Navigate to={PATHS.LOGINPAGE} />
-            )
-          }
-        />
-      </Routes>
+      {isLoggedIn === null && <LoadingComponent />}
+      {isLoggedIn !== null && (
+        <>
+          <Navbar handleLogout={handleLogout} user={user} setUser={setUser} />
+          <Routes>
+            <Route
+              exact
+              path={PATHS.HOMEPAGE}
+              element={<HomePage user={user} />}
+            />
+            <Route
+              exact
+              path={PATHS.SIGNUPPAGE}
+              element={<Signup setUser={setUser} />}
+            />
+            <Route
+              exact
+              path={PATHS.LOGINPAGE}
+              element={<LogIn setUser={setUser} />}
+            />
+            <Route
+              exact
+              path={PATHS.RECIPES}
+              element={<Recipes user={user} />}
+            />
+            <Route
+              exact
+              path={PATHS.RECIPES_DETAILS}
+              element={<RecipeDetails user={user} setUser={setUser} />}
+            />
+            <Route
+              exact
+              path={PATHS.CREATE_RECIPE}
+              element={
+                isLoggedIn ? (
+                  <AddRecipe user={user} />
+                ) : (
+                  <Navigate to={PATHS.LOGINPAGE} />
+                )
+              }
+            />
+            <Route
+              exact
+              path={PATHS.EDIT_RECIPE}
+              element={
+                isLoggedIn ? (
+                  <EditRecipe user={user} />
+                ) : (
+                  <Navigate to={PATHS.LOGINPAGE} />
+                )
+              }
+            />
+            <Route
+              exact
+              path={PATHS.PHOTOS}
+              element={
+                isLoggedIn ? (
+                  <Photos user={user} />
+                ) : (
+                  <Navigate to={PATHS.LOGINPAGE} />
+                )
+              }
+            />
+            <Route
+              exact
+              path={PATHS.USER_PROFILE}
+              element={
+                isLoggedIn ? (
+                  <UserProfile user={user} setUser={setUser} />
+                ) : (
+                  <Navigate to={PATHS.LOGINPAGE} />
+                )
+              }
+            />
+            <Route
+              exact
+              path={PATHS.PETS_PROFILE}
+              element={
+                isLoggedIn ? (
+                  <PetProfile user={user} setUser={setUser} />
+                ) : (
+                  <Navigate to={PATHS.LOGINPAGE} />
+                )
+              }
+            />
+            <Route
+              exact
+              path={PATHS.ADD_PET}
+              element={
+                isLoggedIn ? (
+                  <AddPet user={user} setUser={setUser} />
+                ) : (
+                  <Navigate to={PATHS.LOGINPAGE} />
+                )
+              }
+            />
+            <Route
+              exact
+              path={PATHS.EDIT_PET}
+              element={
+                isLoggedIn ? (
+                  <EditPet user={user} />
+                ) : (
+                  <Navigate to={PATHS.LOGINPAGE} />
+                )
+              }
+            />
+            <Route
+              exact
+              path={PATHS.SERVICES}
+              element={<PetServices user={user} />}
+            />
+          </Routes>
+        </>
+      )}
     </div>
   );
 }

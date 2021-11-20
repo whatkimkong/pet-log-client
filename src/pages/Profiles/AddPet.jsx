@@ -1,0 +1,307 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import LoadingComponent from "../../components/Loading";
+import { fileUpload } from "../../services/fileUpload";
+import * as PATHS from "../../utils/paths";
+import TextField from "@mui/material/TextField";
+import { makeStyles } from "@mui/styles";
+import { stylesData } from "../../utils/muiStyles.jsx";
+import MenuItem from "@mui/material/MenuItem";
+import InputAdornment from "@mui/material/InputAdornment";
+import * as PETS_SERVICES from "../../services/pets";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import IconButton from "@mui/material/IconButton";
+
+const petType = [
+  { value: "Dog", label: "Dog" },
+  { value: "Cat", label: "Cat" },
+];
+
+const genderOptions = [
+  { value: "Male", label: "Male" },
+  { value: "Female", label: "Female" },
+];
+
+function PetProfile({ user, setUser }) {
+  const [form, setForm] = useState({
+    type: "",
+    name: "",
+    profilePic: "",
+    birthday: "",
+    breed: "",
+    gender: "",
+    weight: "",
+    avgDailyFood: "",
+    chipId: "",
+    entityL: "",
+    documentIdL: "",
+    expirationDateL: "",
+    entityH: "",
+    documentIdH: "",
+    expirationDateH: "",
+  });
+
+  const {
+    type,
+    name,
+    profilePic,
+    birthday,
+    breed,
+    gender,
+    weight,
+    avgDailyFood,
+    chipId,
+    entityL,
+    documentIdL,
+    expirationDateL,
+    entityH,
+    documentIdH,
+    expirationDateH,
+  } = form;
+
+  const [error, setError] = useState(null);
+  const [imageIsUploading, setImageIsUploading] = useState(false);
+  const navigate = useNavigate();
+
+  const useStyles = makeStyles(stylesData[1]);
+  const classes = useStyles();
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    return setForm({ ...form, [name]: value });
+  }
+
+  function handleImageUpload(event) {
+    setImageIsUploading(true);
+    const uploadData = new FormData();
+    uploadData.append("fileUrl", event.target.files[0]);
+    fileUpload(uploadData).then((res) => {
+      setForm({ ...form, profilePic: res.data.filePath });
+      setImageIsUploading(false);
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const data = {
+      type,
+      name,
+      profilePic,
+      birthday,
+      breed,
+      gender,
+      weight,
+      avgDailyFood,
+      chipId,
+    };
+    PETS_SERVICES.addPet(data)
+      .then((res) => {
+        setUser(res.data.user);
+        navigate(PATHS.PETS_PROFILE);
+      })
+      .catch((err) => setError(err.response.data.errorMessage));
+  }
+
+  return (
+    <div className="public__container">
+      <h3 className="add-pet__title">Add a new pet to your family</h3>
+      <form onSubmit={handleSubmit} className="add-recipe__form">
+        <h6 className="pets__section-title" style={{ marginTop: "0" }}>
+          General data
+        </h6>
+        <TextField
+          select
+          name="type"
+          value={type}
+          onChange={handleChange}
+          className={classes.root}
+          fullWidth
+          helperText="Type of pet"
+          style={{
+            marginBottom: "2vh",
+          }}
+        >
+          {petType.map((option) => (
+            <MenuItem
+              key={option.value}
+              value={option.value}
+              sx={{ fontSize: "0.9rem" }}
+            >
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        <TextField
+          type="text"
+          name="name"
+          value={name}
+          helperText="Name"
+          onChange={handleChange}
+          className={classes.root}
+          variant="outlined"
+          fullWidth
+          style={{
+            marginBottom: "2vh",
+          }}
+          InputLabelProps={{
+            style: { color: "rgba(0, 0, 0, 0.6)" },
+          }}
+        />
+        <TextField
+          type="date"
+          name="birthday"
+          value={birthday}
+          helperText="Birthday"
+          onChange={handleChange}
+          className={classes.root}
+          variant="outlined"
+          fullWidth
+          style={{
+            marginBottom: "2vh",
+          }}
+          InputLabelProps={{
+            style: { color: "rgba(0, 0, 0, 0.6)" },
+          }}
+        />
+        <TextField
+          type="text"
+          name="breed"
+          value={breed}
+          helperText="Breed"
+          onChange={handleChange}
+          className={classes.root}
+          variant="outlined"
+          fullWidth
+          style={{
+            marginBottom: "2vh",
+          }}
+          InputLabelProps={{
+            style: { color: "rgba(0, 0, 0, 0.6)" },
+          }}
+        />
+        <TextField
+          select
+          name="gender"
+          value={gender}
+          onChange={handleChange}
+          className={classes.root}
+          fullWidth
+          helperText="Gender"
+          style={{
+            marginBottom: "2vh",
+          }}
+        >
+          {genderOptions.map((option) => (
+            <MenuItem
+              key={option.value}
+              value={option.value}
+              sx={{ fontSize: "0.9rem" }}
+            >
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        <input
+          type="file"
+          name="profilePic"
+          onChange={handleImageUpload}
+          className="form-control add-form form-control-sm"
+        />
+        {imageIsUploading && <LoadingComponent />}
+        <h6 className="pets__section-title" style={{ marginTop: "7vh" }}>
+          Health data
+        </h6>
+        <TextField
+          type="number"
+          name="weight"
+          value={weight}
+          onChange={handleChange}
+          className={classes.root}
+          variant="outlined"
+          fullWidth
+          helperText="Weight"
+          style={{
+            marginBottom: "2vh",
+          }}
+          InputProps={{
+            inputProps: {
+              min: 0,
+            },
+            endAdornment: (
+              <InputAdornment position="start">
+                <p style={{ color: "rgba(0, 0, 0, 0.6)", margin: "0" }}>
+                  grams
+                </p>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <TextField
+          type="number"
+          name="avgDailyFood"
+          value={avgDailyFood}
+          onChange={handleChange}
+          className={classes.root}
+          variant="outlined"
+          fullWidth
+          helperText="Average daily food quantity"
+          style={{
+            marginBottom: "2vh",
+          }}
+          InputProps={{
+            inputProps: {
+              min: 0,
+            },
+            endAdornment: (
+              <InputAdornment position="start">
+                <p style={{ color: "rgba(0, 0, 0, 0.6)", margin: "0" }}>
+                  grams
+                </p>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <h6 className="pets__section-title">Security data</h6>
+        <TextField
+          type="text"
+          name="chipId"
+          value={chipId}
+          helperText="Chip Id"
+          onChange={handleChange}
+          className={classes.root}
+          variant="outlined"
+          fullWidth
+          style={{
+            marginBottom: "2vh",
+          }}
+          InputLabelProps={{
+            style: { color: "rgba(0, 0, 0, 0.6)" },
+          }}
+        />
+        {error && (
+          <div className="error-block">
+            <p className="auth__error">
+              <span>{error}</span>
+            </p>
+          </div>
+        )}
+        <button
+          className="button__submit btn-light btn add-recipe__submit-btn"
+          type="submit"
+          disabled={imageIsUploading}
+          style={{ marginTop: imageIsUploading ? "0vh" : "2vh" }}
+        >
+          Submit
+        </button>
+      </form>
+      <Link to={PATHS.PETS_PROFILE} className="link-back">
+        <IconButton aria-label="Example">
+          <ArrowBackIcon fontSize="large" sx={{ color: "white" }} />
+        </IconButton>
+      </Link>
+    </div>
+  );
+}
+
+export default PetProfile;

@@ -5,6 +5,8 @@ export const LOGINPAGE = "/login";
 
 export const USER_PROFILE = "/profile";
 export const PETS_PROFILE = "/pets/";
+export const ADD_PET = "/pets/add";
+export const EDIT_PET = "/pets/:id";
 export const PHOTOS = "/photos";
 
 export const RECIPES = "/recipes";

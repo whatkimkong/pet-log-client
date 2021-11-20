@@ -197,7 +197,7 @@ function RecipeDetails({ user, setUser }) {
           </div>
           <Link
             to={PATHS.RECIPES}
-            className="link-back recipe-details__link-back"
+            className="link-back"
           >
             <IconButton aria-label="Example">
               <ArrowBackIcon

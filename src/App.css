@@ -49,7 +49,7 @@
 }
 
 .link-back {
-  margin-left: 10vw;
+  align-self: flex-start;
 }
 
 /* PUBLIC */
@@ -353,10 +353,6 @@ button.button__submit {
   width: 100%;
 }
 
-.recipe-details__link-back {
-  align-self: flex-start;
-}
-
 .recipe-actions {
   margin-right: 2vw;
 }
@@ -439,7 +435,8 @@ button.button__submit {
 
 .profile__profile-pic {
   border-radius: 50%;
-  height: 80%;
+  height: 90%;
+  width: 90%;
 }
 
 .profile__profile-pic-container {
@@ -466,10 +463,6 @@ button.button__submit {
   width: 90% !important;
 }
 
-.link-back-profile {
-  align-self: flex-start !important;
-}
-
 .pets__carousel {
   display: flex;
   align-items: center;
@@ -489,5 +482,81 @@ button.button__submit {
 
 .profile__insurance-category {
   margin: 0;
-  width: fit-content;
+  width: 40vw;
+}
+
+.add-pet-link {
+  align-self: flex-end;
+  margin-right: 4vw !important;
+  text-decoration: none !important;
+}
+
+.add-pet__title {
+  color: white;
+  display: block;
+  margin: 0 auto;
+  padding-top: 4vh;
+  text-align: left;
+  width: 90% !important;
+}
+
+.profile__pet-profile-pic {
+  border-radius: 50%;
+  height: 90%;
+  width: 90%;
+}
+
+.profile__pet-profile-pic-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border-radius: 50%;
+  height: 16vh;
+  margin-top: 2vh;
+  width: 30vw;
+}
+
+.pet-profile__title {
+  color: white;
+  display: block;
+  margin: 0 auto;
+  padding-top: 4vh;
+  text-align: center;
+  width: 90% !important;
+}
+
+.pet-info-container {
+  margin-top: 4vh;
+  width: 80%;
+}
+
+.pet-subcontainer-title {
+  color: rgba(255, 255, 255, 0.6);
+  display: inline-block;
+  margin-right: 6vw;
+  text-align: left !important;
+  min-width: 30vw !important;
+}
+
+.pet-subcontainer-description {
+  color: white !important;
+  display: inline;
+}
+
+.form__title {
+  color: white;
+  display: block;
+  margin: 0 auto 2vh auto;
+  width: 90% !important;
+}
+
+.add-pet-info__form {
+  display: block;
+  margin: 0 auto !important;
+  width: 90% !important;
+}
+
+.pet-actions {
+  margin-top: 2vh;
 }

@@ -86,7 +86,6 @@ function AddRecipe({ user }) {
   }
 
   useEffect(() => {
-    console.log("mounting");
     RECIPES_SERVICES.getOne(params.recipeId)
       .then((res) => {
         setForm({

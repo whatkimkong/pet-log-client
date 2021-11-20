@@ -13,3 +13,19 @@ export function getPets() {
 export function addPet(data) {
   return petsService.post("/add", data);
 }
+
+export function addLegalData(data) {
+  return petsService.post("/legal/add", data);
+}
+
+export function removePet(petId) {
+  return petsService.delete(`/${petId}`);
+}
+
+export function getOne(petId) {
+  return petsService.get(`/${petId}`);
+}
+
+export function editPet(petId, data) {
+  return petsService.patch(`/${petId}`, data);
+}
