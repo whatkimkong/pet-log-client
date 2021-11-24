@@ -10,7 +10,9 @@ import { stylesData } from "../../utils/muiStyles.jsx";
 import MenuItem from "@mui/material/MenuItem";
 import InputAdornment from "@mui/material/InputAdornment";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import IconButton from "@mui/material/IconButton";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import Paper from "@mui/material/Paper";
 
 const statusValues = [
   { value: "false", label: "Public" },
@@ -86,12 +88,16 @@ function AddRecipe({ user }) {
   return (
     <div>
       <h3 className="add-recipe__title">Create and Share a New Recipe</h3>
-      <form onSubmit={handleSubmit} className="add-recipe__form">
+      <form
+        onSubmit={handleSubmit}
+        className="add-recipe__form"
+        style={{ paddingBottom: "10vh" }}
+      >
         <TextField
           type="text"
           name="title"
           value={title}
-          helperText="Define the title"
+          helperText="Define the title *"
           onChange={handleChange}
           className={classes.root}
           variant="outlined"
@@ -110,7 +116,7 @@ function AddRecipe({ user }) {
           onChange={handleChange}
           className={classes.root}
           fullWidth
-          helperText="Select the status"
+          helperText="Select the status *"
           style={{
             marginBottom: "2vh",
           }}
@@ -132,7 +138,7 @@ function AddRecipe({ user }) {
           onChange={handleChange}
           className={classes.root}
           fullWidth
-          helperText="Select the difficulty level"
+          helperText="Select the difficulty level *"
           style={{
             marginBottom: "2vh",
           }}
@@ -226,11 +232,18 @@ function AddRecipe({ user }) {
           Submit
         </button>
       </form>
-      <Link to={PATHS.RECIPES} className="link-back">
-        <IconButton aria-label="Example">
-          <ArrowBackIcon fontSize="large" sx={{ color: "white" }} />
-        </IconButton>
-      </Link>
+      <Paper
+        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+        elevation={3}
+      >
+        <BottomNavigation showLabels>
+          <BottomNavigationAction
+            label="Back"
+            icon={<ArrowBackIcon />}
+            onClick={() => navigate(PATHS.RECIPES)}
+          />
+        </BottomNavigation>
+      </Paper>
     </div>
   );
 }

@@ -11,8 +11,12 @@ import IconButton from "@mui/material/IconButton";
 import { makeStyles } from "@mui/styles";
 import { stylesData } from "../../utils/muiStyles.jsx";
 import * as PETS_SERVICES from "../../services/pets";
-import BasicMenu from "../../components/Menu/Menu";
-import TextField from "@mui/material/TextField";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import Paper from "@mui/material/Paper";
 
 function PetProfile({ user, setUser }) {
   const [pets, setPets] = useState(null);
@@ -253,7 +257,7 @@ function PetProfile({ user, setUser }) {
                 {pets[pet].chipId}
               </p>
             </div>
-            {pets[pet].legalData.length > 0 &&
+            {/* {pets[pet].legalData.length > 0 &&
               pets[pet].legalData.map((eachData) => {
                 <div>
                   <div
@@ -312,28 +316,36 @@ function PetProfile({ user, setUser }) {
                     </p>
                   </div>
                 </div>;
-              })}
+              })} */}
           </div>
-          <Link to={`${PATHS.PETS_PROFILE}${pets[pet]._id}`}>
-            <button
-              className="button__submit btn-light btn pet-actions"
-              type="button"
-            >
-              Edit
-            </button>
-          </Link>
-          <button
-            className="button__submit btn-light btn pet-actions"
-            type="button"
-            onClick={() => handleDelete(pets[pet]._id)}
-            style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}
+          <Paper
+            sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+            elevation={3}
           >
-            Delete
-          </button>
-          <BasicMenu
+            <BottomNavigation showLabels>
+              <BottomNavigationAction
+                label="Edit"
+                icon={<EditIcon />}
+                onClick={() =>
+                  navigate(`${PATHS.PETS_PROFILE}${pets[pet]._id}`)
+                }
+              />
+              <BottomNavigationAction
+                label={`${pets[pet].name}'s Journal`}
+                icon={<AssignmentIcon />}
+                onClick={() => navigate(`${PATHS.LOGS}/${pets[pet]._id}`)}
+              />
+              <BottomNavigationAction
+                label="Delete"
+                icon={<DeleteIcon />}
+                onClick={() => handleDelete(pets[pet]._id)}
+              />
+            </BottomNavigation>
+          </Paper>
+          {/* <BasicMenu
             style={{ alignSelf: "flex-end" }}
             handleShows={handleShows}
-          />
+          /> 
           <div>
             {(showLiability || showHealth) && (
               <form
@@ -396,8 +408,8 @@ function PetProfile({ user, setUser }) {
                   Submit
                 </button>
               </form>
-            )}
-          </div>
+            )} 
+          </div>*/}
         </>
       )}
     </div>

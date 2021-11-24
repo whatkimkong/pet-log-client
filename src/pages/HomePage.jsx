@@ -7,7 +7,7 @@ import * as PATHS from "../utils/paths";
 import FoodBankIcon from "@mui/icons-material/FoodBank";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import CommentIcon from "@mui/icons-material/Comment";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PetsIcon from "@mui/icons-material/Pets";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -93,16 +93,16 @@ function HomePage({ user }) {
             </div>
             <div className="homepage__dashboard-card">
               <Link to={PATHS.LOGS} className="homepage__dashboard-link">
-                <CommentIcon sx={{ color: "white" }} fontSize="large" />
-                <p>Logs</p>
+                <AssignmentIcon sx={{ color: "white" }} fontSize="large" />
+                <p>Journal</p>
               </Link>
             </div>
-            <div className="homepage__dashboard-card">
+            {/* <div className="homepage__dashboard-card">
               <Link to={PATHS.CALENDAR} className="homepage__dashboard-link">
                 <CalendarTodayIcon sx={{ color: "white" }} fontSize="large" />
                 <p>Calendar</p>
               </Link>
-            </div>
+            </div> */}
             <div className="homepage__dashboard-card">
               <Link to={PATHS.PHOTOS} className="homepage__dashboard-link">
                 <InsertPhotoIcon sx={{ color: "white" }} fontSize="large" />

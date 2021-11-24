@@ -9,6 +9,9 @@ import { makeStyles } from "@mui/styles";
 import { stylesData } from "../../utils/muiStyles.jsx";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import Paper from "@mui/material/Paper";
 
 function UserProfile({ user, setUser }) {
   console.log(user);
@@ -88,7 +91,7 @@ function UserProfile({ user, setUser }) {
               {user.firstName} {user.lastName}
             </p>
           </div>
-          <form onSubmit={handleSubmit} className="add-recipe__form">
+          <form onSubmit={handleSubmit} className="add-recipe__form" >
             <TextField
               type="text"
               name="firstName"
@@ -146,11 +149,18 @@ function UserProfile({ user, setUser }) {
           </form>
         </>
       )}
-      <Link to={PATHS.HOMEPAGE} className="link-back link-back-profile">
-        <IconButton aria-label="Example">
-          <ArrowBackIcon fontSize="large" sx={{ color: "white" }} />
-        </IconButton>
-      </Link>
+      <Paper
+        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+        elevation={3}
+      >
+        <BottomNavigation showLabels>
+          <BottomNavigationAction
+            label="Back"
+            icon={<ArrowBackIcon />}
+            onClick={() => navigate(PATHS.HOMEPAGE)}
+          />
+        </BottomNavigation>
+      </Paper>
     </div>
   );
 }

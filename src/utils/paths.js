@@ -18,7 +18,9 @@ export const SERVICES = "/services";
 
 export const CALENDAR = "/calendar";
 
-export const LOGS = "/logs";
+export const LOGS = "/journal";
+export const PET_LOGS = "/journal/:petId";
+export const ADD_PET_LOGS = "/journal/:petId/add";
 
 export const ERROR403 = "/403";
 export const ERROR404 = "/404";

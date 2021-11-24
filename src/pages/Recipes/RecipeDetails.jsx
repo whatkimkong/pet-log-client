@@ -13,6 +13,13 @@ import { makeStyles } from "@mui/styles";
 import { stylesData } from "../../utils/muiStyles.jsx";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import Paper from "@mui/material/Paper";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const useStyles = makeStyles({
   rootPrivate: {
@@ -195,61 +202,60 @@ function RecipeDetails({ user, setUser }) {
               {singleRecipe.preparation}
             </p>
           </div>
-          <Link
-            to={PATHS.RECIPES}
-            className="link-back"
-          >
-            <IconButton aria-label="Example">
-              <ArrowBackIcon
-                fontSize="large"
-                sx={{
-                  color: user ? "white" : "#f76333",
-                }}
-              />
-            </IconButton>
-          </Link>
           {user && (
-            <div className="recipe-actions-container">
-              {!user.favRecipes.includes(singleRecipe._id) && (
-                <button
-                  className="button__submit btn-light btn recipe-actions"
-                  type="button"
-                  onClick={handleAddToFavs}
-                >
-                  Add to Favs
-                </button>
-              )}
-              {user.favRecipes.includes(singleRecipe._id) && (
-                <button
-                  className="button__submit btn-light btn recipe-actions"
-                  type="button"
-                  onClick={handleRemoveFromFavs}
-                  style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}
-                >
-                  Remove from Favs
-                </button>
-              )}
-              {user.email === singleRecipe.creator.email && (
-                <>
-                  <Link to={`${PATHS.RECIPES}/${singleRecipe._id}/edit`}>
-                    <button
-                      className="button__submit btn-light btn recipe-actions"
-                      type="button"
-                    >
-                      Edit
-                    </button>
-                  </Link>
-                  <button
-                    className="button__submit btn-light btn recipe-actions"
-                    type="button"
-                    onClick={handleDeleteRecipe}
-                    style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}
-                  >
-                    Delete
-                  </button>
-                </>
-              )}
-            </div>
+            <Paper
+              sx={{
+                position: "fixed",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                zIndex: 1000,
+              }}
+              elevation={3}
+            >
+              <BottomNavigation showLabels>
+                <BottomNavigationAction
+                  label="Back"
+                  icon={<ArrowBackIcon />}
+                  onClick={() => navigate(PATHS.RECIPES)}
+                />
+                <BottomNavigationAction
+                  label={
+                    !user.favRecipes.includes(singleRecipe._id)
+                      ? "Add"
+                      : "Remove"
+                  }
+                  icon={
+                    !user.favRecipes.includes(singleRecipe._id) ? (
+                      <FavoriteIcon />
+                    ) : (
+                      <FavoriteBorderIcon />
+                    )
+                  }
+                  onClick={
+                    !user.favRecipes.includes(singleRecipe._id)
+                      ? handleAddToFavs
+                      : handleRemoveFromFavs
+                  }
+                />
+                {user.email === singleRecipe.creator.email && (
+                  <>
+                    <BottomNavigationAction
+                      label="Edit"
+                      icon={<EditIcon />}
+                      onClick={() =>
+                        navigate(`${PATHS.RECIPES}/${singleRecipe._id}/edit`)
+                      }
+                    />
+                    <BottomNavigationAction
+                      label="Delete"
+                      icon={<DeleteIcon />}
+                      onClick={handleDeleteRecipe}
+                    />
+                  </>
+                )}
+              </BottomNavigation>
+            </Paper>
           )}
           <hr style={{ color: user ? "white" : "#f76333" }} />
           <h5 style={{ color: user ? "white" : "black", marginTop: "5vh" }}>

@@ -11,7 +11,9 @@ import MenuItem from "@mui/material/MenuItem";
 import InputAdornment from "@mui/material/InputAdornment";
 import * as PETS_SERVICES from "../../services/pets";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import IconButton from "@mui/material/IconButton";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import Paper from "@mui/material/Paper";
 
 const petType = [
   { value: "Dog", label: "Dog" },
@@ -306,11 +308,18 @@ function EditPet({ user }) {
             Submit
           </button>
         </form>
-        <Link to={PATHS.PETS_PROFILE} className="link-back">
-          <IconButton aria-label="Example">
-            <ArrowBackIcon fontSize="large" sx={{ color: "white" }} />
-          </IconButton>
-        </Link>
+        <Paper
+          sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+          elevation={3}
+        >
+          <BottomNavigation showLabels>
+            <BottomNavigationAction
+              label="Back"
+              icon={<ArrowBackIcon />}
+              onClick={() => navigate(PATHS.PETS_PROFILE)}
+            />
+          </BottomNavigation>
+        </Paper>
       </div>
     </div>
   );
