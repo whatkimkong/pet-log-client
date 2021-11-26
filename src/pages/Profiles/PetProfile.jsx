@@ -331,7 +331,7 @@ function PetProfile({ user, setUser }) {
                 }
               />
               <BottomNavigationAction
-                label={`${pets[pet].name}'s Journal`}
+                label={`Journal`}
                 icon={<AssignmentIcon />}
                 onClick={() => navigate(`${PATHS.LOGS}/${pets[pet]._id}`)}
               />

@@ -7,8 +7,6 @@ import { stylesData } from "../../utils/muiStyles.jsx";
 import MenuItem from "@mui/material/MenuItem";
 import InputAdornment from "@mui/material/InputAdornment";
 import * as LOGS_SERVICES from "../../services/logs";
-import * as EVENTS_SERVICES from "../../services/events";
-import * as PETS_SERVICES from "../../services/pets";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
@@ -20,7 +18,7 @@ const logCategory = [
   { value: "Food", label: "Food" },
 ];
 
-function AddLog({ user }) {
+function EditLog({ user }) {
   const [form, setForm] = useState({
     category: "",
     title: "",
@@ -31,6 +29,7 @@ function AddLog({ user }) {
     foodFlavor: "",
     foodQuantity: "",
   });
+
   const {
     category,
     title,
@@ -41,10 +40,11 @@ function AddLog({ user }) {
     foodFlavor,
     foodQuantity,
   } = form;
-  const [pet, setPet] = useState(null);
+
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const { petId } = useParams();
+  const { petId, logId } = useParams();
 
   const useStyles = makeStyles(stylesData[1]);
   const classes = useStyles();
@@ -52,13 +52,6 @@ function AddLog({ user }) {
   function handleChange(event) {
     const { name, value } = event.target;
     return setForm({ ...form, [name]: value });
-  }
-
-  function handleFoodQuantityCount(totalQtt, date) {
-    const avgQtt = pet.avgDailyFood;
-    const numOfDays = Math.floor(totalQtt / avgQtt);
-    const dayjs = require("dayjs");
-    return dayjs(date).add(numOfDays, "day").format("DD/MM/YYYY");
   }
 
   function handleSubmit(event) {
@@ -72,26 +65,8 @@ function AddLog({ user }) {
       foodBrand,
       foodFlavor,
       foodQuantity,
-      pet: petId,
-      owner: user._id,
     };
-
-    const eventData = {
-      category,
-      name: title,
-      pet: petId,
-      owner: user._id,
-      date: expirationDate || handleFoodQuantityCount(foodQuantity, date),
-    };
-    {
-      (category === "Vaccines" || (category === "Food" && pet.avgDailyFood)) &&
-        EVENTS_SERVICES.addEvent(eventData)
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch((err) => setError(err.response.data.errorMessage));
-    }
-    LOGS_SERVICES.addLog(data)
+    LOGS_SERVICES.editLog(petId, logId, data)
       .then((res) => {
         navigate(`${PATHS.LOGS}/${petId}`);
       })
@@ -99,16 +74,28 @@ function AddLog({ user }) {
   }
 
   useEffect(() => {
-    PETS_SERVICES.getOne(petId)
+    LOGS_SERVICES.getOne(petId, logId)
       .then((res) => {
-        setPet(res.data);
+        console.log(res.data);
+        setForm({
+          ...form,
+          category: res.data.log.category,
+          title: res.data.log.title,
+          date: res.data.log.date,
+          expirationDate: res.data.log.expirationDate,
+          comment: res.data.log.comment,
+          foodBrand: res.data.log.foodBrand,
+          foodFlavor: res.data.log.foodFlavor,
+          foodQuantity: res.data.log.foodQuantity,
+        });
+        setIsLoading(false);
       })
       .catch((err) => <Navigate to={PATHS.ERROR500} />);
   }, []);
 
   return (
     <div className="public__container">
-      <h3 className="add-pet__title">Create a new entry</h3>
+      <h3 className="add-pet__title">Edit a log</h3>
       <form onSubmit={handleSubmit} className="add-recipe__form">
         <TextField
           select
@@ -290,4 +277,4 @@ function AddLog({ user }) {
   );
 }
 
-export default AddLog;
+export default EditLog;

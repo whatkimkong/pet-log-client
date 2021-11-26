@@ -13,3 +13,11 @@ export function addLog(data) {
 export function getAllByPet(petId) {
   return logsService.get(`/${petId}`);
 }
+
+export function getOne(petId, logId) {
+  return logsService.get(`/${petId}/${logId}`);
+}
+
+export function editLog(petId, logId, data) {
+  return logsService.patch(`/${petId}/${logId}`, data);
+}

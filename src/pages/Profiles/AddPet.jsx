@@ -10,6 +10,7 @@ import { stylesData } from "../../utils/muiStyles.jsx";
 import MenuItem from "@mui/material/MenuItem";
 import InputAdornment from "@mui/material/InputAdornment";
 import * as PETS_SERVICES from "../../services/pets";
+import * as EVENTS_SERVICES from "../../services/events";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
@@ -84,6 +85,22 @@ function PetProfile({ user, setUser }) {
     });
   }
 
+  function handleBirthdays() {
+    const dayjs = require("dayjs");
+    const yearToday = dayjs().year();
+    const monthToday = dayjs().month() + 1;
+    const dayToday = dayjs().date();
+    const monthBirthday = dayjs(birthday).month() + 1;
+    const dayBirthday = dayjs(birthday).date();
+    if (monthToday < monthBirthday) {
+      return new Date(yearToday, monthBirthday - 1, dayBirthday);
+    } else if ((monthToday = monthBirthday && dayToday <= dayBirthday)) {
+      return new Date(yearToday, monthBirthday - 1, dayBirthday);
+    } else {
+      return new Date(yearToday + 1, monthBirthday - 1, dayBirthday);
+    }
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     const data = {
@@ -100,6 +117,16 @@ function PetProfile({ user, setUser }) {
     PETS_SERVICES.addPet(data)
       .then((res) => {
         setUser(res.data.user);
+        const eventData = {
+          category: "Birthday",
+          name: `${res.data.pet.name}'s birthday'`,
+          pet: res.data.pet._id,
+          owner: user._id,
+          date: handleBirthdays(),
+        };
+        return EVENTS_SERVICES.addEvent(eventData);
+      })
+      .then((res) => {
         navigate(PATHS.PETS_PROFILE);
       })
       .catch((err) => setError(err.response.data.errorMessage));

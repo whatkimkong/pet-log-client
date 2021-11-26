@@ -1,19 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "../App.css";
 import petPic1 from "../images/pets1.jpeg";
 import logo from "../images/logo.png";
 import * as CONSTS from "../utils/consts";
 import * as PATHS from "../utils/paths";
+import * as EVENTS_SERVICES from "../services/events";
 import FoodBankIcon from "@mui/icons-material/FoodBank";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PetsIcon from "@mui/icons-material/Pets";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
+import { useEffect, useState } from "react";
+import LogCard from "../components/LogCard/LogCard";
+import LoadingComponent from "../components/Loading";
 
 function HomePage({ user }) {
+  const [listOfEvents, setListOfEvents] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    EVENTS_SERVICES.getEvents()
+      .then((res) => {
+        setListOfEvents(res.data.events);
+        setIsLoading(false);
+      })
+      .catch((err) => <Navigate to={PATHS.ERROR500} />);
+  }, []);
+
   return (
     <div
       style={{
@@ -75,7 +88,23 @@ function HomePage({ user }) {
           <div className="homepage__notifications-card">
             <div className="homepage__notifications-title">
               <NotificationsIcon sx={{ color: "#ed5d30" }} />
-              <h6>Happening next week</h6>
+              <h6>Happening next</h6>
+              <hr style={{ margin: "0" }} />
+              {isLoading && <LoadingComponent />}
+              {listOfEvents && listOfEvents.length > 0 && (
+                <table
+                  class="table table-borderless table-sm"
+                  style={{ margin: "2vh 0 0 0", width: "100%" }}
+                >
+                  <tbody>
+                    {listOfEvents.map((eachEvent) => {
+                      return (
+                        <LogCard eachLog={eachEvent} key={eachEvent._id} />
+                      );
+                    })}
+                  </tbody>
+                </table>
+              )}
             </div>
           </div>
           <div className="homepage__dashboard-container">
@@ -91,13 +120,13 @@ function HomePage({ user }) {
                 <p>Services</p>
               </Link>
             </div>
-            <div className="homepage__dashboard-card">
+            {/*<div className="homepage__dashboard-card">
               <Link to={PATHS.LOGS} className="homepage__dashboard-link">
                 <AssignmentIcon sx={{ color: "white" }} fontSize="large" />
                 <p>Journal</p>
               </Link>
             </div>
-            {/* <div className="homepage__dashboard-card">
+             <div className="homepage__dashboard-card">
               <Link to={PATHS.CALENDAR} className="homepage__dashboard-link">
                 <CalendarTodayIcon sx={{ color: "white" }} fontSize="large" />
                 <p>Calendar</p>

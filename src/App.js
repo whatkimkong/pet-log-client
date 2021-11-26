@@ -19,6 +19,7 @@ import LoadingComponent from "./components/Loading";
 import PetServices from "./pages/PetServices/PetServices";
 import PetLog from "./pages/Profiles/PetLog";
 import AddLog from "./pages/Profiles/AddLog";
+import EditLog from "./pages/Profiles/EditLog";
 
 function App() {
   const navigate = useNavigate();
@@ -189,6 +190,17 @@ function App() {
               element={
                 isLoggedIn ? (
                   <AddLog user={user} />
+                ) : (
+                  <Navigate to={PATHS.LOGINPAGE} />
+                )
+              }
+            />
+            <Route
+              exact
+              path={PATHS.EDIT_PET_LOGS}
+              element={
+                isLoggedIn ? (
+                  <EditLog user={user} />
                 ) : (
                   <Navigate to={PATHS.LOGINPAGE} />
                 )
