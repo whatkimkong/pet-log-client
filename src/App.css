@@ -144,6 +144,11 @@
   text-decoration: none;
 }
 
+.homepage__link:hover {
+  color: white;
+  text-decoration: none;
+}
+
 .homepage__card-description {
   margin: 0 auto 19px;
   text-align: center;
