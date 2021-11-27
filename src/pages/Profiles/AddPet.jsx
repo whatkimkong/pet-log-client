@@ -17,6 +17,7 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Paper from "@mui/material/Paper";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import dayjs from "dayjs";
 
 const petType = [
   { value: "Dog", label: "Dog" },
@@ -73,6 +74,7 @@ function PetProfile({ user, setUser }) {
   const classes = useStyles();
 
   function handleChange(event) {
+    console.log(value);
     const { name, value } = event.target;
     return setForm({ ...form, [name]: value });
   }
@@ -87,19 +89,19 @@ function PetProfile({ user, setUser }) {
     });
   }
 
-  function handleBirthdays() {
-    const dayjs = require("dayjs");
-    const yearToday = dayjs().year();
-    const monthToday = dayjs().month() + 1;
-    const dayToday = dayjs().date();
-    const monthBirthday = dayjs(birthday).month() + 1;
-    const dayBirthday = dayjs(birthday).date();
-    if (monthToday < monthBirthday) {
-      return new Date(yearToday, monthBirthday - 1, dayBirthday);
-    } else if ((monthToday = monthBirthday && dayToday <= dayBirthday)) {
-      return new Date(yearToday, monthBirthday - 1, dayBirthday);
+  function handleBirthdays(day) {
+    console.log(day);
+    const today = dayjs().year();
+    const birthdayThisYear = day.add(12, "hour").year(today).toString();
+    const birthdayNextYear = day
+      .add(12, "hour")
+      .year(today + 1)
+      .toString();
+    const isBefore = dayjs().isBefore(birthdayThisYear);
+    if (isBefore) {
+      return birthdayThisYear;
     } else {
-      return new Date(yearToday + 1, monthBirthday - 1, dayBirthday);
+      return birthdayNextYear;
     }
   }
 
@@ -124,7 +126,7 @@ function PetProfile({ user, setUser }) {
           name: `${res.data.pet.name}'s birthday'`,
           pet: res.data.pet._id,
           owner: user._id,
-          date: handleBirthdays(),
+          date: handleBirthdays(dayjs(birthday)),
         };
         return EVENTS_SERVICES.addEvent(eventData);
       })

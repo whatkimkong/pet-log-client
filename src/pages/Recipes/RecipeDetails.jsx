@@ -233,20 +233,20 @@ function RecipeDetails({ user, setUser }) {
                   }
                 />
                 {user.email === singleRecipe.creator.email && (
-                  <>
-                    <BottomNavigationAction
-                      label="Edit"
-                      icon={<EditIcon />}
-                      onClick={() =>
-                        navigate(`${PATHS.RECIPES}/${singleRecipe._id}/edit`)
-                      }
-                    />
-                    <BottomNavigationAction
-                      label="Delete"
-                      icon={<DeleteIcon />}
-                      onClick={handleDeleteRecipe}
-                    />
-                  </>
+                  <BottomNavigationAction
+                    label="Edit"
+                    icon={<EditIcon />}
+                    onClick={() =>
+                      navigate(`${PATHS.RECIPES}/${singleRecipe._id}/edit`)
+                    }
+                  />
+                )}
+                {user.email === singleRecipe.creator.email && (
+                  <BottomNavigationAction
+                    label="Delete"
+                    icon={<DeleteIcon />}
+                    onClick={handleDeleteRecipe}
+                  />
                 )}
               </BottomNavigation>
             </Paper>
