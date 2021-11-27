@@ -190,6 +190,10 @@
   text-decoration: none;
 }
 
+.homepage__dashboard-link:hover {
+  color: black;
+}
+
 /* AUTH */
 
 .login__container {

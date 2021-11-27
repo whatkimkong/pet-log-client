@@ -16,17 +16,15 @@ function LocationMarker({
 
   const map = useMapEvents({
     click: (e) => {
-      if (user) {
-        setSelection(e.latlng);
-        setShowExtraContainer("form");
-        setForm({
-          category: "",
-          name: "",
-          image: "",
-          description: "",
-          schedule: "",
-        });
-      }
+      setSelection(e.latlng);
+      setShowExtraContainer("form");
+      setForm({
+        category: "",
+        name: "",
+        image: "",
+        description: "",
+        schedule: "",
+      });
     },
     locationfound: (e) => {
       setPosition(e.latlng);

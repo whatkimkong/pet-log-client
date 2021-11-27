@@ -385,6 +385,116 @@ function PetServices({ user }) {
           <p className="pet-services__tip-to-add">
             Click on any location to add a new service
           </p>
+          {user && showExtraContainer === "form" && (
+            <form onSubmit={handleSubmit} className="add-recipe__form">
+              <h3
+                className="services__title"
+                style={{
+                  color: user ? "white" : "black",
+                  width: "80%",
+                  margin: "0 auto 2vh",
+                }}
+              >
+                Add a service
+              </h3>
+              <TextField
+                select
+                name="category"
+                value={category}
+                onChange={handleChange}
+                className={classes.root}
+                fullWidth
+                helperText="Select the service category"
+                style={{
+                  marginBottom: "2vh",
+                }}
+              >
+                {serviceTypes.map((option) => (
+                  <MenuItem
+                    key={option.value}
+                    value={option.value}
+                    sx={{ fontSize: "0.9rem" }}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                type="text"
+                name="name"
+                value={name}
+                helperText="Name"
+                onChange={handleChange}
+                className={classes.root}
+                variant="outlined"
+                fullWidth
+                style={{
+                  marginBottom: "2vh",
+                }}
+                InputLabelProps={{
+                  style: { color: "rgba(0, 0, 0, 0.6)" },
+                }}
+              />
+              <TextField
+                type="text"
+                name="description"
+                value={description}
+                helperText="Describe the service"
+                onChange={handleChange}
+                className={classes.root}
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={5}
+                style={{
+                  marginBottom: "2vh",
+                }}
+                InputLabelProps={{
+                  style: { color: "rgba(0, 0, 0, 0.6)" },
+                }}
+              />
+              <TextField
+                type="text"
+                name="schedule"
+                value={schedule}
+                helperText="Opening schedule"
+                onChange={handleChange}
+                className={classes.root}
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={5}
+                style={{
+                  marginBottom: "2vh",
+                }}
+                InputLabelProps={{
+                  style: { color: "rgba(0, 0, 0, 0.6)" },
+                }}
+              />
+              <input
+                type="file"
+                name="image"
+                onChange={handleImageUpload}
+                className="form-control add-form form-control-sm"
+              />
+              {error && (
+                <div className="error-block">
+                  <p className="auth__error">
+                    <span>{error}</span>
+                  </p>
+                </div>
+              )}
+              {imageIsUploading && <LoadingComponent />}
+              <button
+                className="button__submit btn-light btn add-recipe__submit-btn"
+                type="submit"
+                disabled={imageIsUploading}
+                style={{ marginTop: imageIsUploading ? "0vh" : "2vh" }}
+              >
+                Submit
+              </button>
+            </form>
+          )}
           {detailed && showExtraContainer === "details" && (
             <>
               <div className="recipe-details__container">
@@ -478,121 +588,6 @@ function PetServices({ user }) {
                   </div>
                 )}
               </div>
-
-              {user && (
-                <form
-                  hidden={showExtraContainer !== "form"}
-                  onSubmit={handleSubmit}
-                  className="add-recipe__form"
-                >
-                  <h3
-                    className="services__title"
-                    style={{
-                      color: user ? "white" : "black",
-                      width: "80%",
-                      margin: "0 auto 2vh",
-                    }}
-                  >
-                    Add a service
-                  </h3>
-                  <TextField
-                    select
-                    name="category"
-                    value={category}
-                    onChange={handleChange}
-                    className={classes.root}
-                    fullWidth
-                    helperText="Select the service category"
-                    style={{
-                      marginBottom: "2vh",
-                    }}
-                  >
-                    {serviceTypes.map((option) => (
-                      <MenuItem
-                        key={option.value}
-                        value={option.value}
-                        sx={{ fontSize: "0.9rem" }}
-                      >
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                  <TextField
-                    type="text"
-                    name="name"
-                    value={name}
-                    helperText="Name"
-                    onChange={handleChange}
-                    className={classes.root}
-                    variant="outlined"
-                    fullWidth
-                    style={{
-                      marginBottom: "2vh",
-                    }}
-                    InputLabelProps={{
-                      style: { color: "rgba(0, 0, 0, 0.6)" },
-                    }}
-                  />
-                  <TextField
-                    type="text"
-                    name="description"
-                    value={description}
-                    helperText="Describe the service"
-                    onChange={handleChange}
-                    className={classes.root}
-                    variant="outlined"
-                    fullWidth
-                    multiline
-                    rows={5}
-                    style={{
-                      marginBottom: "2vh",
-                    }}
-                    InputLabelProps={{
-                      style: { color: "rgba(0, 0, 0, 0.6)" },
-                    }}
-                  />
-                  <TextField
-                    type="text"
-                    name="schedule"
-                    value={schedule}
-                    helperText="Opening schedule"
-                    onChange={handleChange}
-                    className={classes.root}
-                    variant="outlined"
-                    fullWidth
-                    multiline
-                    rows={5}
-                    style={{
-                      marginBottom: "2vh",
-                    }}
-                    InputLabelProps={{
-                      style: { color: "rgba(0, 0, 0, 0.6)" },
-                    }}
-                  />
-                  <input
-                    type="file"
-                    name="image"
-                    onChange={handleImageUpload}
-                    className="form-control add-form form-control-sm"
-                  />
-                  {error && (
-                    <div className="error-block">
-                      <p className="auth__error">
-                        <span>{error}</span>
-                      </p>
-                    </div>
-                  )}
-                  {imageIsUploading && <LoadingComponent />}
-                  <button
-                    className="button__submit btn-light btn add-recipe__submit-btn"
-                    type="submit"
-                    disabled={imageIsUploading}
-                    style={{ marginTop: imageIsUploading ? "0vh" : "2vh" }}
-                  >
-                    Submit
-                  </button>
-                </form>
-              )}
               <hr style={{ color: user ? "white" : "#f76333" }} />
               <h5 style={{ color: user ? "white" : "black", marginTop: "5vh" }}>
                 Reviews
