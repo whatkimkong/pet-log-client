@@ -74,10 +74,6 @@
   align-self: flex-end;
 }
 
-.homepage__logo {
-  width: 18%;
-}
-
 .homepage__description {
   color: white;
 }
@@ -102,18 +98,16 @@
 
 .homepage__signup-btn {
   font-size: 1.1rem !important;
-  margin-bottom: 4vh;
-  margin-top: 4vh;
-  width: 50vw;
+  width: 170px;
 }
 
 .homepage__card {
   background-color: #ed5d30;
   border-radius: 3px;
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 35%);
-  height: 30vh !important;
+  height: max-content !important;
   margin-top: 5vh;
-  width: 70%;
+  width: 250px;
 }
 
 .homepage__notifications-card {
@@ -132,10 +126,10 @@
   background-color: white;
   border-radius: 50%;
   display: flex;
-  height: 32%;
+  height: 40px;
   justify-content: center;
-  margin: 4vh auto 2vh auto;
-  width: 25%;
+  margin: 19px auto 10px auto;
+  width: 40px;
 }
 
 .homepage__icon {
@@ -151,7 +145,7 @@
 }
 
 .homepage__card-description {
-  margin: 0 auto;
+  margin: 0 auto 19px;
   text-align: center;
   width: 80%;
 }
@@ -162,7 +156,7 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin-top: 0vh;
-  width: 80%;
+  width: 300px;
 }
 
 .homepage__dashboard-card {
@@ -174,7 +168,7 @@
   justify-content: center;
   height: 10vh;
   margin: 10px;
-  width: 30%;
+  width: 100px;
 }
 
 .homepage__dashboard-card p {
@@ -245,6 +239,13 @@ button.button__submit {
 }
 
 /* RECIPES */
+
+.search-bar-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 
 .recipes__container {
   align-items: center;
@@ -327,6 +328,7 @@ button.button__submit {
 
 .recipe-details__subcontainer {
   margin-top: 5vh;
+  width: 100%;
 }
 
 .subcontainer-title {
@@ -436,8 +438,8 @@ button.button__submit {
 
 .profile__profile-pic {
   border-radius: 50%;
-  height: 90%;
-  width: 90%;
+  height: 100px;
+  width: 100px;
 }
 
 .profile__profile-pic-container {
@@ -446,8 +448,8 @@ button.button__submit {
   justify-content: center;
   background-color: white;
   border-radius: 50%;
-  height: 16vh;
-  width: 30vw;
+  height: 110px;
+  width: 110px;
 }
 
 .profile__name {
@@ -492,7 +494,7 @@ button.button__submit {
   text-decoration: none !important;
 }
 
-.add-pet__title {
+.h3__title {
   color: white;
   display: block;
   margin: 0 auto;
@@ -503,8 +505,8 @@ button.button__submit {
 
 .profile__pet-profile-pic {
   border-radius: 50%;
-  height: 90%;
-  width: 90%;
+  height: 100px;
+  width: 100px;
 }
 
 .profile__pet-profile-pic-container {
@@ -513,9 +515,9 @@ button.button__submit {
   justify-content: center;
   background-color: white;
   border-radius: 50%;
-  height: 16vh;
   margin-top: 2vh;
-  width: 30vw;
+  height: 110px;
+  width: 110px;
 }
 
 .pet-profile__title {
@@ -537,7 +539,7 @@ button.button__submit {
   display: inline-block;
   margin-right: 6vw;
   text-align: left !important;
-  min-width: 30vw !important;
+  min-width: 100px !important;
 }
 
 .pet-subcontainer-description {
@@ -575,4 +577,156 @@ button.button__submit {
   border-radius: 8px;
   margin-top: 2vh;
   width: 90% !important;
+}
+
+.blinking {
+  animation: pulsate 1s ease-out;
+  -webkit-animation: pulsate 1s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  opacity: 1;
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.services__filter-container {
+  margin-top: 15px;
+  text-align: center;
+  width: 95%;
+}
+
+.btn-filter-services {
+  margin: 0 5px 10px;
+}
+
+.popup__name {
+  font-size: 0.9rem;
+  margin: 0 !important;
+}
+
+.popup__link {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  text-decoration: underline;
+}
+
+@media (min-width: 576px) {
+  .search-bar-container {
+    width: 80%;
+  }
+  .h3__title {
+    text-align: center;
+  }
+  .auth__form {
+    width: 50% !important;
+  }
+  .login__signup-link {
+    width: 50%;
+  }
+  .homepage__dashboard-container {
+    width: 300px;
+  }
+  .homepage__dashboard-card {
+    width: 100px;
+  }
+  .homepage__dashboard-card p {
+    font-size: 0.9rem;
+  }
+  .homepage__notifications-card {
+    width: 60%;
+  }
+  .profile-form {
+    width: 50% !important;
+  }
+  .pet-info-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .pet-info-subcontainer {
+    width: 250px;
+  }
+}
+
+@media (min-width: 768px) {
+  .public__container {
+    padding-top: 12vh;
+  }
+  .homepage__card {
+    height: 140px !important;
+    width: 400px !important;
+  }
+  .homepage__card-description {
+    font-size: 1.1rem;
+  }
+  .search-bar-container {
+    width: 50%;
+  }
+  .btn {
+    font-size: 1.1rem !important;
+  }
+  .auth__form {
+    width: 40% !important;
+  }
+  .login__signup-link {
+    width: 40%;
+  }
+  .homepage__dashboard-container {
+    width: 400px;
+  }
+  .homepage__dashboard-card {
+    height: 80px;
+    width: 140px;
+  }
+  .homepage__dashboard-card p {
+    font-size: 0.9rem;
+  }
+  .homepage__notifications-card {
+    width: 60%;
+  }
+  .profile__profile-pic {
+    height: 100px;
+    width: 100px;
+  }
+  .profile__profile-pic-container {
+    height: 110px;
+    width: 110px;
+  }
+  .profile-form {
+    width: 40% !important;
+  }
+  .profile__name {
+    font-size: 1.2rem !important;
+  }
+  .pet-info-subcontainer {
+    width: 300px;
+  }
+  .add-recipe__form {
+    width: 60% !important;
+  }
+}
+
+@media (min-width: 1007px) {
+  .auth__form {
+    width: 30% !important;
+  }
+  .login__signup-link {
+    width: 30%;
+  }
+  .profile-form {
+    width: 30% !important;
+  }
+  .add-recipe__form {
+    width: 40% !important;
+  }
 }

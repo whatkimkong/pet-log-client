@@ -19,3 +19,18 @@
   color: black;
   text-decoration: none;
 }
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+  .card-text {
+    font-size: 1rem !important;
+  }
+  .card-title {
+    font-size: 1.7rem;
+  }
+}
+
+@media (min-width: 1007px) {
+}

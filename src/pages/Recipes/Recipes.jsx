@@ -65,33 +65,32 @@ function Recipes({ user }) {
   }, []);
 
   return (
-    <div className="recipes__container">
-      <h3
-        className="recipes__title"
-        style={{ color: user ? "white" : "black" }}
-      >
+    <div className="public__container">
+      <h3 className="h3__title" style={{ color: user ? "white" : "black" }}>
         Check out the best recipes for your pets
       </h3>
-      <TextField
-        id="outlined"
-        className={classes.root}
-        value={search}
-        onChange={handleChange}
-        onKeyDown={handleSubmit}
-        multiline
-        style={{
-          width: user ? "80%" : "90%",
-          marginTop: "4vh",
-        }}
-        maxRows={4}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon sx={{ color: user && "white" }} />
-            </InputAdornment>
-          ),
-        }}
-      />
+      <div className="search-bar-container">
+        <TextField
+          id="outlined"
+          className={classes.root}
+          value={search}
+          onChange={handleChange}
+          onKeyDown={handleSubmit}
+          multiline
+          style={{
+            width: user ? "80%" : "90%",
+            marginTop: "4vh",
+          }}
+          maxRows={4}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon sx={{ color: user && "white" }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </div>
       <div className="recipes__btn-filter-container">
         <button
           type="button"

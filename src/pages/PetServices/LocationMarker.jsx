@@ -1,34 +1,43 @@
 import React, { useState, useEffect } from "react";
-import { Marker, Popup, useMapEvents, Circle } from "react-leaflet";
+import { Marker, useMapEvents, Circle } from "react-leaflet";
+import markerIcon from "../../images/marker.png";
+import * as L from "leaflet";
 
 function LocationMarker({
-  setShowForm,
+  setShowExtraContainer,
   setForm,
   selection,
   setSelection,
   position,
   setPosition,
+  user,
 }) {
   const [accuracy, setAccuracy] = useState(null);
 
   const map = useMapEvents({
     click: (e) => {
-      console.log("click", e);
-      setSelection(e.latlng);
-      setShowForm(false);
-      setForm({
-        category: "",
-        name: "",
-        image: "",
-        description: "",
-        schedule: "",
-      });
+      if (user) {
+        setSelection(e.latlng);
+        setShowExtraContainer("form");
+        setForm({
+          category: "",
+          name: "",
+          image: "",
+          description: "",
+          schedule: "",
+        });
+      }
     },
     locationfound: (e) => {
       setPosition(e.latlng);
       setAccuracy(e.accuracy);
       map.flyTo(e.latlng, 15);
     },
+  });
+
+  const LeafIcon = L.icon({
+    iconSize: [30, 30],
+    iconUrl: markerIcon,
   });
 
   useEffect(() => {
@@ -42,10 +51,13 @@ function LocationMarker({
     <>
       <Circle
         center={position}
-        pathOptions={{ fillColor: "blue" }}
+        pathOptions={{ fillColor: "red", color: "transparent" }}
         radius={accuracy}
+        className="blinking"
       />
-      {selection && <Marker position={selection}></Marker>}
+      {selection && user && (
+        <Marker position={selection} icon={LeafIcon}></Marker>
+      )}
     </>
   );
 }

@@ -8,7 +8,6 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 import TimerIcon from "@mui/icons-material/Timer";
 import Chip from "@mui/material/Chip";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import IconButton from "@mui/material/IconButton";
 import { makeStyles } from "@mui/styles";
 import { stylesData } from "../../utils/muiStyles.jsx";
 import TextField from "@mui/material/TextField";
@@ -70,15 +69,10 @@ function RecipeDetails({ user, setUser }) {
       .catch((err) => setError(err.response.data.errorMessage));
   }
 
-  function handleShow() {
-    setShow(!show);
-  }
-
   function handleAddToFavs() {
     RECIPES_SERVICES.addToFavs(params.recipeId)
       .then((res) => {
         setUser(res.data.user);
-        navigate(PATHS.RECIPES);
       })
       .catch((err) => setError(err.response.data.errorMessage));
   }
@@ -87,7 +81,6 @@ function RecipeDetails({ user, setUser }) {
     RECIPES_SERVICES.removeFromFavs(params.recipeId)
       .then((res) => {
         setUser(res.data.user);
-        navigate(PATHS.RECIPES);
       })
       .catch((err) => setError(err.response.data.errorMessage));
   }
@@ -108,28 +101,29 @@ function RecipeDetails({ user, setUser }) {
     RECIPES_SERVICES.getOne(params.recipeId)
       .then((res) => {
         setSingleRecipe(res.data);
-        console.log(res.data);
         setIsLoading(false);
       })
       .catch((err) => <Navigate to={PATHS.ERROR500} />);
-  }, []);
+  }, [setSingleRecipe, setUser]);
 
   return (
-    <div>
+    <div className="public__container">
       {isLoading && <LoadingComponent />}
       {!isLoading && (
         <div className="recipe-details__container">
           <h3
-            className="recipe-details__title"
-            style={{ color: user ? "white" : "black" }}
+            className="h3__title"
+            style={{ color: user ? "white" : "black", marginBottom: "2vh" }}
           >
             {singleRecipe.title}
           </h3>
-          <img
-            src={singleRecipe.image}
-            alt={singleRecipe.title}
-            className="recipe-details__img"
-          />
+          {singleRecipe.image && (
+            <img
+              src={singleRecipe.image}
+              alt={singleRecipe.title}
+              className="recipe-details__img"
+            />
+          )}
           <div className="recipe-details__card-rating">
             <Rating
               className={user ? classes.rootPrivate : classes.rootPublic}
@@ -267,7 +261,7 @@ function RecipeDetails({ user, setUser }) {
                 <button
                   className="button__submit btn-light btn add-review__btn"
                   type="button"
-                  onClick={handleShow}
+                  onClick={() => setShow(!show)}
                 >
                   Add a review
                 </button>

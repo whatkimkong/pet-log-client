@@ -15,6 +15,7 @@ export const CREATE_RECIPE = "/recipes/add";
 export const EDIT_RECIPE = "/recipes/:recipeId/edit";
 
 export const SERVICES = "/services";
+export const EDIT_SERVICE = "/services/:serviceId/edit";
 
 export const CALENDAR = "/calendar";
 

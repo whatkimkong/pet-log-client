@@ -1,8 +1,6 @@
 import { Link, Navigate } from "react-router-dom";
 import "../App.css";
 import petPic1 from "../images/pets1.jpeg";
-import logo from "../images/logo.png";
-import * as CONSTS from "../utils/consts";
 import * as PATHS from "../utils/paths";
 import * as EVENTS_SERVICES from "../services/events";
 import FoodBankIcon from "@mui/icons-material/FoodBank";
@@ -33,16 +31,12 @@ function HomePage({ user }) {
         background: `linear-gradient(0deg, rgba(247, 99, 51, 0.4), rgba(247, 99, 51, 0.4)), url(${petPic1})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
+        backgroundPosition: "0 65%",
       }}
       className="public__container"
     >
       {!user && (
         <>
-          <img
-            src={logo}
-            alt={CONSTS.CAPITALIZED_APP}
-            className="homepage__logo"
-          />
           <div className="homepage__description">
             <h1 className="homepage__description__title">Pet Log</h1>
             <h3 className="homepage__description__slogan">your pet's diary</h3>

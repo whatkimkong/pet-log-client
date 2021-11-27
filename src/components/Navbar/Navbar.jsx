@@ -21,6 +21,11 @@ const Navbar = ({ user, handleLogout }) => {
     setAnchorEl(null);
   };
 
+  function handleLogoutButton() {
+    setAnchorEl(null);
+    handleLogout();
+  }
+
   return (
     <nav className="navbar__container">
       <div>
@@ -61,18 +66,21 @@ const Navbar = ({ user, handleLogout }) => {
           {user && (
             <>
               {" "}
-              <Link to={PATHS.LOGS} className="navbar__link">
+              <Link to={PATHS.PETS_PROFILE} className="navbar__link">
                 <MenuItem onClick={handleClose} sx={{ fontSize: "0.9rem" }}>
-                  Logs
+                  Pets
                 </MenuItem>
               </Link>
-              <Link to={PATHS.CALENDAR} className="navbar__link">
+              <Link to={PATHS.PHOTOS} className="navbar__link">
                 <MenuItem onClick={handleClose} sx={{ fontSize: "0.9rem" }}>
-                  Calendar
+                  Photos
                 </MenuItem>
               </Link>
               <hr />
-              <MenuItem onClick={handleLogout} sx={{ fontSize: "0.9rem" }}>
+              <MenuItem
+                onClick={handleLogoutButton}
+                sx={{ fontSize: "0.9rem" }}
+              >
                 Logout
               </MenuItem>
             </>

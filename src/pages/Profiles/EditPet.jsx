@@ -118,7 +118,7 @@ function EditPet({ user }) {
   return (
     <div>
       <div className="public__container">
-        <h3 className="add-pet__title">Edit your pet's information</h3>
+        <h3 className="h3__title">Edit your pet's information</h3>
         <form onSubmit={handleSubmit} className="add-recipe__form">
           <h6 className="pets__section-title" style={{ marginTop: "0" }}>
             General data

@@ -65,9 +65,10 @@ function Signup({ setUser }) {
       }}
       className="public__container"
     >
-      <Link to={HOMEPAGE} className="auth__link">
-        <img src={logo} alt={CONSTS.CAPITALIZED_APP} className="auth__logo" />
-      </Link>
+      <div className="homepage__description">
+        <h1 className="homepage__description__title">Pet Log</h1>
+        <h3 className="homepage__description__slogan">your pet's diary</h3>
+      </div>
       <form onSubmit={handleSubmit} className="auth__form">
         <div class="mb-3">
           <input

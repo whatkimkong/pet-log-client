@@ -86,8 +86,8 @@ function AddRecipe({ user }) {
   }
 
   return (
-    <div>
-      <h3 className="add-recipe__title">Create and Share a New Recipe</h3>
+    <div className="public__container">
+      <h3 className="h3__title">Create and Share a New Recipe</h3>
       <form
         onSubmit={handleSubmit}
         className="add-recipe__form"

@@ -75,7 +75,9 @@ function UserProfile({ user, setUser }) {
 
   return (
     <div className="public__container">
-      <h3 className="profile__title">Edit your profile data</h3>
+      <h3 className="h3__title" style={{ marginBottom: "15px" }}>
+        Edit your profile data
+      </h3>
       {isLoading && <LoadingComponent />}
       {!isLoading && (
         <>
@@ -91,7 +93,7 @@ function UserProfile({ user, setUser }) {
               {user.firstName} {user.lastName}
             </p>
           </div>
-          <form onSubmit={handleSubmit} className="add-recipe__form" >
+          <form onSubmit={handleSubmit} className="add-recipe__form profile-form">
             <TextField
               type="text"
               name="firstName"

@@ -95,7 +95,7 @@ function EditLog({ user }) {
 
   return (
     <div className="public__container">
-      <h3 className="add-pet__title">Edit a log</h3>
+      <h3 className="h3__title">Edit a log</h3>
       <form onSubmit={handleSubmit} className="add-recipe__form">
         <TextField
           select

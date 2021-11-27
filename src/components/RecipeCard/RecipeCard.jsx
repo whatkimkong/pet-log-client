@@ -25,7 +25,7 @@ function RecipeCard({
   return (
     <div className="card" style={{ width: "16rem" }}>
       <Link to={`${PATHS.RECIPES}/${_id}`} className="card-links">
-        <img src={image} alt={title} className="card-img-top" />
+        {image && <img src={image} alt={title} className="card-img-top" />}
         <div className="card-body">
           <p className="card-text">
             {firstName} {lastName}

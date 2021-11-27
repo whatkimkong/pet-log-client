@@ -10,6 +10,22 @@ export function getAll() {
   return petServicesService.get("/");
 }
 
+export function getOne(serviceId) {
+  return petServicesService.get(`/${serviceId}`);
+}
+
 export function createService(data) {
   return petServicesService.post("/add", data);
+}
+
+export function editService(serviceId, data) {
+  return petServicesService.patch(`/${serviceId}`, data);
+}
+
+export function deleteService(serviceId) {
+  return petServicesService.delete(`/${serviceId}`);
+}
+
+export function createReview(serviceId, data) {
+  return petServicesService.post(`/${serviceId}/reviews/create`, data);
 }

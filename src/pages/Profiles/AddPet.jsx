@@ -15,6 +15,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Paper from "@mui/material/Paper";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const petType = [
   { value: "Dog", label: "Dog" },
@@ -132,9 +134,46 @@ function PetProfile({ user, setUser }) {
       .catch((err) => setError(err.response.data.errorMessage));
   }
 
+  useEffect(() => {
+    toast.info("Fill out your pet's birthday so you get an alert every year", {
+      position: "top-right",
+      delay: 2000,
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    toast.info(
+      "Fill out its average daily food quantity, so that we can calculate when you'll be out of stock.",
+      {
+        position: "top-right",
+        delay: 6000,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
+  }, []);
+
   return (
     <div className="public__container">
-      <h3 className="add-pet__title">Add a new pet to your family</h3>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <h3 className="h3__title">Add a new pet to your family</h3>
       <form onSubmit={handleSubmit} className="add-recipe__form">
         <h6 className="pets__section-title" style={{ marginTop: "0" }}>
           General data

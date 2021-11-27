@@ -108,7 +108,7 @@ function AddLog({ user }) {
 
   return (
     <div className="public__container">
-      <h3 className="add-pet__title">Create a new entry</h3>
+      <h3 className="h3__title">Create a new entry</h3>
       <form onSubmit={handleSubmit} className="add-recipe__form">
         <TextField
           select

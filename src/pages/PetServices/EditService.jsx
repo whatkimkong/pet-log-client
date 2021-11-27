@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams, Navigate } from "react-router-dom";
+import { Navigate, useParams, Link, useNavigate } from "react-router-dom";
+import * as PET_SERVICES_SERVICES from "../../services/petServices";
+import * as PATHS from "../../utils/paths";
 import LoadingComponent from "../../components/Loading";
 import { fileUpload } from "../../services/fileUpload";
-import * as PATHS from "../../utils/paths";
-import * as RECIPES_SERVICES from "../../services/recipes";
 import TextField from "@mui/material/TextField";
 import { makeStyles } from "@mui/styles";
 import { stylesData } from "../../utils/muiStyles.jsx";
@@ -14,42 +14,29 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Paper from "@mui/material/Paper";
 
-const statusValues = [
-  { value: "false", label: "Public" },
-  { value: "true", label: "Private" },
+const serviceTypes = [
+  { value: "Dog Parks", label: "Dog Parks" },
+  { value: "Vets", label: "Vets" },
+  { value: "Pet Shops", label: "Pet Shops" },
+  { value: "Bath&Grooming", label: "Bath&Grooming" },
+  { value: "Trainers", label: "Trainers" },
+  { value: "Day Care", label: "Day Care" },
 ];
 
-const difficultyLevel = [
-  { value: "Easy", label: "Easy" },
-  { value: "Medium", label: "Medium" },
-  { value: "Hard", label: "Hard" },
-];
-
-function AddRecipe({ user }) {
+function EditService({ user }) {
   const [form, setForm] = useState({
-    title: "",
-    statusPrivate: null,
+    category: "",
+    name: "",
     image: "",
-    difficulty: "",
-    time: "",
-    ingredients: "",
-    preparation: "",
+    description: "",
+    schedule: "",
   });
-
-  const {
-    title,
-    statusPrivate,
-    image,
-    difficulty,
-    time,
-    ingredients,
-    preparation,
-  } = form;
+  const { category, name, image, description, schedule } = form;
   const [error, setError] = useState(null);
   const [imageIsUploading, setImageIsUploading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const params = useParams();
+  const { serviceId } = useParams();
 
   const useStyles = makeStyles(stylesData[1]);
   const classes = useStyles();
@@ -72,33 +59,29 @@ function AddRecipe({ user }) {
   function handleSubmit(event) {
     event.preventDefault();
     const data = {
-      title,
-      statusPrivate,
+      category,
+      name,
       image,
-      difficulty,
-      time,
-      ingredients,
-      preparation,
+      description,
+      schedule,
     };
-    RECIPES_SERVICES.editRecipe(params.recipeId, data)
+    PET_SERVICES_SERVICES.editService(serviceId, data)
       .then((res) => {
-        navigate(`${PATHS.RECIPES}/${params.recipeId}`);
+        navigate(`${PATHS.SERVICES}`);
       })
       .catch((err) => setError(err.response.data.errorMessage));
   }
 
   useEffect(() => {
-    RECIPES_SERVICES.getOne(params.recipeId)
+    PET_SERVICES_SERVICES.getOne(serviceId)
       .then((res) => {
         setForm({
           ...form,
-          title: res.data.title,
-          statusPrivate: res.data.statusPrivate,
+          category: res.data.category,
+          name: res.data.name,
           image: res.data.image,
-          difficulty: res.data.difficulty,
-          time: res.data.time,
-          ingredients: res.data.ingredients,
-          preparation: res.data.preparation,
+          description: res.data.description,
+          schedule: res.data.schedule,
         });
         setIsLoading(false);
       })
@@ -106,16 +89,52 @@ function AddRecipe({ user }) {
   }, []);
 
   return (
-    <div className="public__container">
-      <h3 className="h3__title">Edit your recipe</h3>
+    <div>
+      <h3 className="h3__title">Edit your service</h3>
       {isLoading && <LoadingComponent />}
       {!isLoading && (
-        <form onSubmit={handleSubmit} className="add-recipe__form">
+        <form
+          onSubmit={handleSubmit}
+          className="add-recipe__form"
+          style={{ paddingBottom: "10vh" }}
+        >
+          <h3
+            className="services__title"
+            style={{
+              color: user ? "white" : "black",
+              width: "80%",
+              margin: "0 auto 2vh",
+            }}
+          >
+            Add a service
+          </h3>
+          <TextField
+            select
+            name="category"
+            value={category}
+            onChange={handleChange}
+            className={classes.root}
+            fullWidth
+            helperText="Select the service category"
+            style={{
+              marginBottom: "2vh",
+            }}
+          >
+            {serviceTypes.map((option) => (
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                sx={{ fontSize: "0.9rem" }}
+              >
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField
             type="text"
-            name="title"
-            value={title}
-            helperText="Define the title"
+            name="name"
+            value={name}
+            helperText="Name"
             onChange={handleChange}
             className={classes.root}
             variant="outlined"
@@ -128,76 +147,10 @@ function AddRecipe({ user }) {
             }}
           />
           <TextField
-            select
-            name="statusPrivate"
-            value={statusPrivate}
-            onChange={handleChange}
-            className={classes.root}
-            fullWidth
-            helperText="Select the status"
-            style={{
-              marginBottom: "2vh",
-            }}
-          >
-            {statusValues.map((option) => (
-              <MenuItem
-                key={option.value}
-                value={option.value}
-                sx={{ fontSize: "0.9rem" }}
-              >
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            select
-            name="difficulty"
-            value={difficulty}
-            onChange={handleChange}
-            className={classes.root}
-            fullWidth
-            helperText="Select the difficulty level"
-            style={{
-              marginBottom: "2vh",
-            }}
-          >
-            {difficultyLevel.map((option) => (
-              <MenuItem
-                key={option.value}
-                value={option.value}
-                sx={{ fontSize: "0.9rem" }}
-              >
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            type="number"
-            name="time"
-            value={time}
-            onChange={handleChange}
-            className={classes.root}
-            variant="outlined"
-            fullWidth
-            helperText="Total time"
-            style={{
-              marginBottom: "2vh",
-            }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <p style={{ color: "rgba(0, 0, 0, 0.6)", margin: "0" }}>
-                    min
-                  </p>
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
             type="text"
-            name="ingredients"
-            value={ingredients}
-            helperText="List of ingredients"
+            name="description"
+            value={description}
+            helperText="Describe the service"
             onChange={handleChange}
             className={classes.root}
             variant="outlined"
@@ -213,9 +166,9 @@ function AddRecipe({ user }) {
           />
           <TextField
             type="text"
-            name="preparation"
-            value={preparation}
-            helperText="Preparation process"
+            name="schedule"
+            value={schedule}
+            helperText="Opening schedule"
             onChange={handleChange}
             className={classes.root}
             variant="outlined"
@@ -238,7 +191,7 @@ function AddRecipe({ user }) {
           {image && (
             <img
               src={image}
-              alt={title}
+              alt={name}
               style={{ width: "50%", display: "block", margin: "2vh auto" }}
             />
           )}
@@ -260,6 +213,7 @@ function AddRecipe({ user }) {
           </button>
         </form>
       )}
+
       <Paper
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
         elevation={3}
@@ -268,7 +222,7 @@ function AddRecipe({ user }) {
           <BottomNavigationAction
             label="Back"
             icon={<ArrowBackIcon />}
-            onClick={() => navigate(`${PATHS.RECIPES}/${params.recipeId}`)}
+            onClick={() => navigate(`${PATHS.SERVICES}`)}
           />
         </BottomNavigation>
       </Paper>
@@ -276,4 +230,4 @@ function AddRecipe({ user }) {
   );
 }
 
-export default AddRecipe;
+export default EditService;

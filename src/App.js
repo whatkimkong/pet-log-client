@@ -20,6 +20,7 @@ import PetServices from "./pages/PetServices/PetServices";
 import PetLog from "./pages/Profiles/PetLog";
 import AddLog from "./pages/Profiles/AddLog";
 import EditLog from "./pages/Profiles/EditLog";
+import EditService from "./pages/PetServices/EditService";
 
 function App() {
   const navigate = useNavigate();
@@ -201,6 +202,17 @@ function App() {
               element={
                 isLoggedIn ? (
                   <EditLog user={user} />
+                ) : (
+                  <Navigate to={PATHS.LOGINPAGE} />
+                )
+              }
+            />
+            <Route
+              exact
+              path={PATHS.EDIT_SERVICE}
+              element={
+                isLoggedIn ? (
+                  <EditService user={user} />
                 ) : (
                   <Navigate to={PATHS.LOGINPAGE} />
                 )
