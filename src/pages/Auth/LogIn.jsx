@@ -8,8 +8,8 @@ import logo from "../../images/logo.png";
 
 function LogIn({ setUser }) {
   const [form, setForm] = useState({
-    email: "inesherminio@gmail.com",
-    password: "MacZazu21",
+    email: "",
+    password: "",
   });
   const { email, password } = form;
   const [error, setError] = useState(null);
