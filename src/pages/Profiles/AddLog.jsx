@@ -132,22 +132,24 @@ function AddLog({ user }) {
             </MenuItem>
           ))}
         </TextField>
-        <TextField
-          type="text"
-          name="title"
-          value={title}
-          helperText="Title *"
-          onChange={handleChange}
-          className={classes.root}
-          variant="outlined"
-          fullWidth
-          style={{
-            marginBottom: "2vh",
-          }}
-          InputLabelProps={{
-            style: { color: "rgba(0, 0, 0, 0.6)" },
-          }}
-        />
+        {category !== "Food" && (
+          <TextField
+            type="text"
+            name="title"
+            value={title}
+            helperText="Title *"
+            onChange={handleChange}
+            className={classes.root}
+            variant="outlined"
+            fullWidth
+            style={{
+              marginBottom: "2vh",
+            }}
+            InputLabelProps={{
+              style: { color: "rgba(0, 0, 0, 0.6)" },
+            }}
+          />
+        )}
         <TextField
           type="date"
           name="date"
