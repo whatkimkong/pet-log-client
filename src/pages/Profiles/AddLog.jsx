@@ -65,7 +65,7 @@ function AddLog({ user }) {
     event.preventDefault();
     const data = {
       category,
-      title,
+      title: category === "Food" ? "Food stock alert" : title,
       date,
       expirationDate,
       comment,
