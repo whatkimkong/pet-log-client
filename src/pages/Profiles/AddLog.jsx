@@ -13,6 +13,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Paper from "@mui/material/Paper";
+import dayjs from "dayjs";
 
 const logCategory = [
   { value: "Vaccines", label: "Vaccines" },
@@ -57,8 +58,7 @@ function AddLog({ user }) {
   function handleFoodQuantityCount(totalQtt, date) {
     const avgQtt = pet.avgDailyFood;
     const numOfDays = Math.floor(totalQtt / avgQtt);
-    const dayjs = require("dayjs");
-    return dayjs(date).add(numOfDays, "day").format("DD/MM/YYYY");
+    return dayjs(date).add(numOfDays, "day").toString();
   }
 
   function handleSubmit(event) {

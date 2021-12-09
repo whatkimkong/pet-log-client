@@ -90,7 +90,6 @@ function PetProfile({ user, setUser }) {
   }
 
   function handleBirthdays(day) {
-    console.log(day);
     const today = dayjs().year();
     const birthdayThisYear = day.add(12, "hour").year(today).toString();
     const birthdayNextYear = day

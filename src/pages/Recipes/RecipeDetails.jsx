@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 function RecipeDetails({ user, setUser }) {
   const [singleRecipe, setSingleRecipe] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const params = useParams();
+  const { recipeId } = useParams();
   const [form, setForm] = useState({
     title: "",
     score: "",
@@ -60,8 +60,9 @@ function RecipeDetails({ user, setUser }) {
       comment,
       creator: user._id,
     };
-    RECIPES_SERVICES.createReview(params.recipeId, data)
+    RECIPES_SERVICES.createReview(recipeId, data)
       .then((res) => {
+        console.log(res.data.recipe);
         setSingleRecipe(res.data.recipe);
         setForm({ title: "", score: "", comment: "" });
         setShow(true);
@@ -70,7 +71,7 @@ function RecipeDetails({ user, setUser }) {
   }
 
   function handleAddToFavs() {
-    RECIPES_SERVICES.addToFavs(params.recipeId)
+    RECIPES_SERVICES.addToFavs(recipeId)
       .then((res) => {
         setUser(res.data.user);
       })
@@ -78,7 +79,7 @@ function RecipeDetails({ user, setUser }) {
   }
 
   function handleRemoveFromFavs() {
-    RECIPES_SERVICES.removeFromFavs(params.recipeId)
+    RECIPES_SERVICES.removeFromFavs(recipeId)
       .then((res) => {
         setUser(res.data.user);
       })
@@ -86,10 +87,10 @@ function RecipeDetails({ user, setUser }) {
   }
 
   function handleDeleteRecipe() {
-    RECIPES_SERVICES.removeFromFavs(params.recipeId)
+    RECIPES_SERVICES.removeFromFavs(recipeId)
       .then((res) => {
         setUser(res.data.user);
-        return RECIPES_SERVICES.deleteRecipe(params.recipeId);
+        return RECIPES_SERVICES.deleteRecipe(recipeId);
       })
       .then((res) => {
         navigate(PATHS.RECIPES);
@@ -98,7 +99,7 @@ function RecipeDetails({ user, setUser }) {
   }
 
   useEffect(() => {
-    RECIPES_SERVICES.getOne(params.recipeId)
+    RECIPES_SERVICES.getOne(recipeId)
       .then((res) => {
         setSingleRecipe(res.data);
         setIsLoading(false);

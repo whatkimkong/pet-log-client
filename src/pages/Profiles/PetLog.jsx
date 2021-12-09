@@ -23,7 +23,6 @@ function PetLog({ user }) {
   useEffect(() => {
     PET_SERVICES.getOne(petId)
       .then((res) => {
-        console.log(res.data);
         setPet(res.data);
         setListOfLogs(res.data.logs);
         setIsLoading(false);

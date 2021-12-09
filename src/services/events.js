@@ -7,6 +7,7 @@ const eventsService = axios.create({
 });
 
 export function addEvent(data) {
+  console.log(data);
   return eventsService.post("/add", data);
 }
 

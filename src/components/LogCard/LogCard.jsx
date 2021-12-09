@@ -32,7 +32,7 @@ function LogCard({
   return (
     <>
       <tr
-        onClick={!name && handleExpand}
+        onClick={!name ? handleExpand : undefined}
         className="main-table-item"
         style={{ backgroundColor: white && "white" }}
       >
@@ -51,7 +51,7 @@ function LogCard({
         )}
       </tr>
       <tr>
-        <td colspan="4">
+        <td colSpan="4">
           {showDetails && (
             <table class="table mb-0 sub-table table-borderless table-sm">
               <thead>

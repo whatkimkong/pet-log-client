@@ -22,6 +22,10 @@ export function removePet(petId) {
   return petsService.delete(`/${petId}`);
 }
 
+export function removePetFromUser(petId) {
+  return petsService.patch(`/${petId}/removeFromPets`);
+}
+
 export function getOne(petId) {
   return petsService.get(`/${petId}`);
 }

@@ -69,10 +69,13 @@ function PetProfile({ user, setUser }) {
   }
 
   function handleDelete(id) {
-    PETS_SERVICES.removePet(id)
+    PETS_SERVICES.removePetFromUser(id)
+      .then((res) => {
+        setUser(res.data.user);
+        return PETS_SERVICES.removePet(id);
+      })
       .then((res) => {
         setPet(0);
-        setUser(res.data.user);
         setPets(res.data.user.pets);
       })
       .catch((err) => {

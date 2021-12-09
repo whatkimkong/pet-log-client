@@ -87,7 +87,7 @@ function HomePage({ user }) {
               {isLoading && <LoadingComponent />}
               {listOfEvents && listOfEvents.length > 0 && (
                 <table
-                  class="table table-borderless table-sm"
+                  className="table table-borderless table-sm"
                   style={{ margin: "2vh 0 0 0", width: "100%" }}
                 >
                   <tbody>
