@@ -78,7 +78,7 @@ function AddLog({ user }) {
 
     const eventData = {
       category,
-      name: title,
+      name: category === "Food" ? "Food stock alert" : title,
       pet: petId,
       owner: user._id,
       date: expirationDate || handleFoodQuantityCount(foodQuantity, date),
